@@ -1,0 +1,69 @@
+html {
+  background: url(img/reg.jpg) no-repeat center center fixed;
+  background-size: cover;
+  height: 100%;
+  overflow: scroll;
+  font-family: sans-serif;
+
+}
+.welcome{
+	text-align: center;
+	size: 20px;
+	color: #4f5f6f;
+}
+
+.register-box{
+	width: 25%;
+	height: 30%;
+	top: 50%;
+	left: 50%;
+	position: absolute;
+	transform: translate(-50%,-50%);s
+	box-sizing: border-box;
+	padding: 70px 30px;
+}
+
+.register-box h1{
+	margin: 0;
+	padding: 0 0 20px;
+	text-align: center;
+	font-size: 32px;
+	color: #4f5f6f;
+}
+
+.register-box p{
+	margin: 0;
+	padding: 3px;
+	font-weight: bold;
+	color: #4f5f6f;
+}
+.register-box input{
+	width: 100%;
+	margin-bottom: 20px;
+}
+.register-box input[type="text"], input[type="password"], input[type="email"]
+{
+	border: none;
+	border-bottom: 2px solid #4f5f6f;
+	background-color: transparent;
+	outline: none;
+	height: 40px;
+	font-size: 16px;
+
+}
+.register-box input[type="submit"]
+{
+	border: none;
+	outline: none;
+	height: 40px;
+	background: #1c8adb;
+	color: #fff;
+	border-radius: 4px;
+}
+.register-box a{
+	text-decoration: none;
+	font-size: 100%;
+	color: #4f5f6f;
+	font-weight: bold;
+}
+@media screen and (min-width:768px) and (max-width:959px);
