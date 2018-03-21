@@ -1,55 +1,22 @@
 body {
     background-color: #F4F7F9;
     color: #2B3655;
-    font-size: 87.5%; /*87 la suta din 14px*/
+    font-size: 100%;
     font-family: 'Source Sans Pro';
     line-height: 1.5;
     text-align: left;
 }
 
 .body {
-   margin: 0 auto;
+    margin: 0px auto;
     clear: both; /*no floating elements left right*/
-
-}
-
-.mainContent {
-    overflow: hidden;
-    position: relative;
-    float: left;
-    top: 50px;
-    bottom: 0px;
-    left: 15%;
-    right: 0px;
-    padding: 0px 10px;
-    overflow: auto;
-}
-
-.sideNav {
-    height: 100%;
-    width: 15%;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #F4F7F9;
-    overflow-x: hidden;
-    padding-top: 60px;
-}
-
-.sidenav a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #2B3655;
-    display: block;
 }
 
 .topNav {
     width: 100%;
     height: 50px;
     position: fixed;
-    padding-left: 15%;
+    padding-left: 300px;
     text-decoration: none;
     font-size: 25px;
     background-color: #4E5F70 ;
@@ -60,7 +27,6 @@ body {
     float: left;
     display: block;
     text-decoration: none;
-    font-size: 20px;
 }
 
 .topNav input[type=text] {
@@ -69,13 +35,46 @@ body {
     width: 50%;
     padding: 6px;
     margin-top: 10px;
-    margin-right: 16px;
     margin-left: 10px;
     font-size: 15px;
 }
 
-.map {
-    width: auto;
+.sideNav {
+    height: 100%;
+    width: 300px;
+    padding-top: 8px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #F4F7F9;
+    border-right: 1px solid #4E5F70;
+    overflow-x: hidden;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #2B3655;
+    display: block;
+}
+
+.mainContent {
+    overflow: hidden;
+    float: left;
+    margin-left: 300px;
+    margin-top: 25px;
+    padding: 30px;
+    overflow: auto;
+}
+
+.content {
+    width: 100%;
+}
+
+#map {
+    width: 100%;
 }
 
 .searchIcon {
@@ -87,6 +86,11 @@ body {
     color: #fff;
 }
 
+.logoIcon {
+    width: 210px;
+    padding: 32px;
+}
+
 ul {
     width: 100%;
     margin: 0;
@@ -95,7 +99,7 @@ ul {
 
 ul li {
     list-style: none;
-    border-bottom: 1px solid white;
+    border-bottom: 1px solid #4E5F70;
     padding-left: 30px;
     line-height: 60px;
 }
