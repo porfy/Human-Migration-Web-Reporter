@@ -71,8 +71,8 @@ h1{
 }
 @media screen and (max-width:  768px){
 	.login-box {
-		width: 60%;
-		top: 100%;
+		margin-top: 20px;
+		width: 90%;
 	}
 	
 }
