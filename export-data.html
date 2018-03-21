@@ -25,19 +25,32 @@
 	</div>
 
 	<div class="mainContent">
-		<div class="user-content">
-			<h1>WELCOME, USER!</h1>
-			<h2>About you</h2>
-			<a href="main.html"><img src="img/user.png" alt="" class="avatar"></a>
-			<ul>
-				<li>Full name: User Userel</li>
-				<li>Country: Romania</li>
-				<li>Email address: user@yahoo.com</li>
-				<li>Number of posts: 18</li>
-			</ul>
-			<a href="main.html" id="back-button">Go back to the main page</a>
-			
+		<div class="form-content">
+			<h1>EXPORT/IMPORT DATA</h1>
+			<h2>Export data to computer</h2>
+			<div class="formular">
+				<ul>
+					<li>Choose export type</li>
+					<select>
+	  					<option value="PDF">PDF</option>
+						<option value="JSON">JSON</option>
+						<option value="XML">XML</option>
+					</select>
+					<button>Export</button>
+				</ul>
+			</div>
+			<h2>Import data from computer</h2>
+
+			<div class="formular">
+				<ul>
+					<li>Import from computer</li>
+					<input type="file" dialogtype="save"/>
+				</ul>
+			</div>
+
+			<a href="main.html" id="back-button">Go back to the main page</a>	
 		</div>
 	</div>
+
 </body>
 </html>

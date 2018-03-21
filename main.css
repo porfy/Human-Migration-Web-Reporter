@@ -156,12 +156,49 @@ p {
     border-radius: 50%;
 }
 
+/*add-event.html*/
+
+.form-content ul li {
+    list-style: none;
+    padding-left: 0px;
+    line-height: 30px;
+    border-bottom: 0px;
+}
+
+.form-content ul li:hover {
+    background-color: #F4F7F9 ;
+}
+
+.form-content ul input {
+    width: 50%;
+}
+
+.form-content input[name="details"] {
+    height: 100px;
+}
+
+.formular {
+    background-color: #dff3e2 ;
+    padding: 10px;
+}
+
+#back-button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    margin-top: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
 
 /*Responsive CSS for mobile/tablet*/
 
 @media only screen and (max-width: 768px) {
     .body {
-        background-color: lightblue;
         position: relative;
         display: inline-block;
         overflow: none;
@@ -207,5 +244,30 @@ p {
             padding-left: 0px;
     }
 
+
+
+    /*add-event.html*/
+
+    .form-content ul li {
+        list-style: none;
+        padding-left: 30px;
+        line-height: 60px;
+        border: none;
+    }
+
+    .form-content ul input {
+        width: 100%;
+    }
+
+    .form-content input[name="details"] {
+        height: 100px;
+        width: 100%;
+    }
+
+    .form-content select {
+        width: 100%;
+    }
+
+    /*export-data.html*/
 
 }

@@ -18,24 +18,45 @@
 		<a href="#home"><img src="img/logo.png" id="logoIcon"></a>
 			<ul>
 				<li><a href="user.html">My Profile</a></li>
-				<li><a href="#activity.html">Add Event</a></li>
-				<li><a href="#settings.html">Export Data</a></li>
+				<li><a href="add-event.html">Add Event</a></li>
+				<li><a href="export-data.html">Export Data</a></li>
 				<li><a href="intro.html">Log out</a></li>
 			</ul>
 	</div>
 
 	<div class="mainContent">
-		<div class="user-content">
-			<h1>WELCOME, USER!</h1>
-			<h2>About you</h2>
-			<a href="main.html"><img src="img/user.png" alt="" class="avatar"></a>
-			<ul>
-				<li>Full name: User Userel</li>
-				<li>Country: Romania</li>
-				<li>Email address: user@yahoo.com</li>
-				<li>Number of posts: 18</li>
-				<li><a href="main.html">Go back to the main page</a></li>
-			</ul>
+		<div class="form-content">
+			<h1>ADD A NEW MIGRATION EVENT</h1>
+			<h2>Complete the form below with details about the migration event</h2>
+			<div class="formular">
+				<ul>
+					<li>Event name: </li>
+					<input type="text" name="event-name">
+
+					<li>Date of the event: </li>
+					<input type="date" name="event-date">
+
+					<li>From what country: </li>
+					<select>
+	  					<option value="volvo">Romania</option>
+						<option value="saab">Italia</option>
+						<option value="opel">Spania</option>
+						<option value="audi">Coreea de Nord</option>
+					</select>
+
+					<li>To what country:</li>
+					<select>
+	  					<option value="volvo">Romania</option>
+						<option value="saab">Italia</option>
+						<option value="opel">Spania</option>
+						<option value="audi">Coreea de Nord</option>
+					</select>
+
+					<li>Other details:</li>
+					<input type="text" name="details">
+				</ul>
+			</div>
+			<a href="main.html" id="back-button">Go back to the main page</a>
 			
 		</div>
 	</div>
