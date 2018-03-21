@@ -73,7 +73,7 @@ body {
     width: 100%;
 }
 
-#map_photo {
+.map_photo {
     width: 100%;
 }
 
@@ -201,7 +201,6 @@ p {
     .body {
         position: relative;
         display: inline-block;
-        overflow: none;
         padding: 10px;
         font-size: 24px;
     }
@@ -216,7 +215,7 @@ p {
     }
 
     .topNav #logoIcon {
-        position: center;
+        display: center;
     }
 
     .sideNav {

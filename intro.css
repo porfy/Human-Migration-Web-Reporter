@@ -55,15 +55,20 @@ p{
 }
 
 @media screen and (max-width:  768px){
+
 	.content h1{
 		font-size: 250%;
 	}
+
 	.btn{
 		font-size: 150%;
     	padding: 7px 15px;
     	height: 100%;
     	padding: 20px 30px;
     	display: block;
+    	margin-left: 10px;
+    	margin-right: 10px;
+    	margin-bottom: 10px;
   
 	}
 	p{

@@ -8,14 +8,18 @@ html {
 }
 .welcome{
 	text-align: center;
-	
 	color: #4f5f6f;
+}
+
+#logo {
+	width: 30%;
+
 }
 
 .register-box{
 	width: 30%;
 	height: 30%;
-	top: 50%;
+	top: 30%;
 	left: 50%;
 	position: absolute;
 	transform: translate(-50%,-50%);
