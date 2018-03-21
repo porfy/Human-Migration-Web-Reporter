@@ -12,7 +12,7 @@ body {
     clear: both; /*no floating elements left right*/
 }
 
-.topNav {
+.top-nav {
     width: 100%;
     height: 50px;
     position: fixed;
@@ -23,13 +23,13 @@ body {
     overflow: hidden;
 }
 
-.topNav a {
+.top-nav a {
     float: left;
     display: block;
     text-decoration: none;
 }
 
-.topNav input[type=text] {
+.top-nav input[type=text] {
     float: left;
     border: none;
     width: 50%;
@@ -39,7 +39,7 @@ body {
     font-size: 15px;
 }
 
-.sideNav {
+.side-nav {
     height: 100%;
     width: 20%;
     padding-top: 8px;
@@ -52,15 +52,15 @@ body {
     overflow-x: hidden;
 }
 
-.sidenav a {
-    padding: 8px 8px 8px 32px;
+.side-nav a {
+    padding: 8px 8px 8px 8px;
     text-decoration: none;
     font-size: 25px;
     color: #2B3655;
     display: block;
 }
 
-.mainContent {
+.main-content {
     overflow: hidden;
     float: left;
     margin-left: 20%;
@@ -73,7 +73,7 @@ body {
     width: 100%;
 }
 
-.map_photo {
+.map-photo {
     width: 100%;
 }
 
@@ -82,7 +82,7 @@ body {
     height: 400px;
 }
 
-.searchIcon {
+.search-icon {
     width: 30px;
     float: left;
     padding: 6px;
@@ -91,7 +91,7 @@ body {
     color: #fff;
 }
 
-#logoIcon {
+#logo-icon {
     width: 100%;
     padding: 10px;
 }
@@ -224,7 +224,7 @@ p {
         font-size: 24px;
     }
 
-    .topNav {
+    .top-nav {
         position: relative;
         float: none;
         width: 100%;
@@ -233,16 +233,13 @@ p {
         padding-left: 0px;
     }
 
-    .topNav #logoIcon {
-        display: center;
-    }
-
-    .sideNav {
+    .side-nav {
         position: relative;
+        border: none;
         width: 100%;
     }
 
-    .mainContent {
+    .main-content {
         position: relative;
         width: 100%;
         margin-left: 0px;
