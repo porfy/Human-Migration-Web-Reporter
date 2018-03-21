@@ -66,4 +66,13 @@ h1{
 	text-decoration: none;
 	font-size: 14px;
 	color: #4f5f6f;
+	padding: 10px 10px;
+	display: block;
+}
+@media screen and (max-width:  768px){
+	.login-box {
+		width: 60%;
+		top: 100%;
+	}
+	
 }
