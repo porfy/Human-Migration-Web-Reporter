@@ -96,6 +96,12 @@ body {
     padding: 10px;
 }
 
+input[type="button"]{
+    padding: 6px;
+    margin-left: 10px;
+    margin-top: 6px;
+}
+
 h2 {
     font-family: serif;
 }
@@ -131,6 +137,27 @@ ul li a {
 p {
     font-size: 20px;
 }
+
+/*user.html*/
+
+.user-content ul li {
+    list-style: none;
+    padding-left: 30px;
+    line-height: 30px;
+}
+
+.user-content ul li:hover {
+    background-color: #fff ;
+}
+
+.avatar{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+
+/*Responsive CSS for mobile/tablet*/
 
 @media only screen and (max-width: 768px) {
     .body {
