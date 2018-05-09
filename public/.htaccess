@@ -1,0 +1,15 @@
+Options -MultiViews
+RewriteEngine On
+
+RewriteBase /public
+#daca scot asta de aici si o bagi in config o sa mearga... macar am invatat si eu ceva :D... msss am inteles :D... incerc sa citesc cuv fara e... deci
+#ca sa adaugi o noua ruta (sa afisezi alta pagina trebuie sa: adaugi o noua ruta
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+
+RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
+#ce se intampla cand intri pe o anumita pagina..
+# fii atent.. cum fac un controller cara sa ma duca pe pagina de intro?
+#pentru asta ai nevoie de routing... controllerul e degeaba fara routare... acum zi-mi daca vrei sistemul din video sau ce am eu cu steff
+#ce ati facut voi ca nu am priceput prea bine tutorialul ala
+#iti fac eu ce e important... dar te anunt de acum ca nu mai ai nevoie de App ok

@@ -1,0 +1,288 @@
+body {
+    background-color: #F4F7F9;
+    color: #2B3655;
+    font-size: 100%;
+    font-family: 'Source Sans Pro';
+    line-height: 1.5;
+    text-align: left;
+}
+
+.body {
+    margin: 0 auto;
+    clear: both; /*no floating elements left right*/
+}
+
+.top-nav {
+    width: 100%;
+    height: 50px;
+    position: fixed;
+    padding-left: 20%;
+    text-decoration: none;
+    font-size: 25px;
+    background-color: #4E5F70 ;
+    overflow: hidden;
+}
+
+.top-nav a {
+    float: left;
+    display: block;
+    text-decoration: none;
+}
+
+.top-nav input[type=text] {
+    float: left;
+    border: none;
+    width: 50%;
+    padding: 6px;
+    margin-top: 10px;
+    margin-left: 10px;
+    font-size: 15px;
+}
+
+.side-nav {
+    height: 100%;
+    width: 20%;
+    padding-top: 8px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #F4F7F9;
+    border-right: 1px solid #4E5F70;
+    overflow-x: hidden;
+}
+
+.side-nav a {
+    padding: 8px 8px 8px 8px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #2B3655;
+    display: block;
+}
+
+.main-content {
+    overflow: hidden;
+    float: left;
+    margin-left: 20%;
+    margin-top: 25px;
+    padding: 30px;
+    overflow: auto;
+}
+
+.content {
+    width: 100%;
+}
+
+.map-photo {
+    width: 100%;
+}
+
+#map {
+    width: 100%;
+    height: 400px;
+}
+
+.search-icon {
+    width: 30px;
+    float: left;
+    padding: 6px;
+    margin-left: 10px;
+    margin-top: 4px;
+    color: #fff;
+}
+
+#logo-icon {
+    width: 100%;
+    padding: 10px;
+}
+
+input[type="button"]{
+    padding: 6px;
+    margin-left: 10px;
+    margin-top: 6px;
+}
+
+.align-right {
+    text-align: right;
+}
+
+h2 {
+    font-family: serif;
+}
+
+h3 {
+    font-size: 14px;
+    line-height: 0px;
+}
+
+h2 a {
+    text-decoration: none;
+}
+
+ul {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+ul li {
+    list-style: none;
+    border-bottom: 1px solid #4E5F70;
+    padding-left: 30px;
+    line-height: 60px;
+}
+
+ul li:hover {
+    background-color: #57C3E8 ;
+}
+
+ul li a {
+    text-decoration: none;
+    color: #2B3655;
+    display: block;
+    line-height: 60px;
+}
+
+p {
+    font-size: 20px;
+}
+
+/*user.html*/
+
+.user-content ul li {
+    list-style: none;
+    padding-left: 30px;
+    line-height: 30px;
+    border: none;
+}
+
+.user-content ul li:hover {
+    background-color: #fff ;
+}
+
+.avatar{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+/*add-event.html*/
+
+.form-content ul li {
+    list-style: none;
+    padding-left: 0px;
+    line-height: 30px;
+    border-bottom: 0px;
+}
+
+.form-content ul li:hover {
+    background-color: #F4F7F9 ;
+}
+
+.form-content ul input {
+    width: 50%;
+}
+
+.form-content input[name="details"] {
+    height: 100px;
+}
+
+.formular {
+    background-color: #dff3e2 ;
+    padding: 10px;
+}
+
+#back-button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    margin-top: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+/* contact.html */
+
+.avatar {
+    width: 20%;
+    height: 20%;
+    margin-top: 15px;
+    margin-left: 30px;
+}
+
+
+/*Responsive CSS for mobile/tablet*/
+
+@media only screen and (max-width: 768px) {
+    .body {
+        position: relative;
+        display: inline-block;
+        padding: 10px;
+        font-size: 24px;
+    }
+
+    .top-nav {
+        position: relative;
+        float: none;
+        width: 100%;
+        margin-left: 0px;
+        margin-top: 0px;
+        padding-left: 0px;
+    }
+
+    .side-nav {
+        position: relative;
+        border: none;
+        width: 100%;
+    }
+
+    .main-content {
+        position: relative;
+        width: 100%;
+        margin-left: 0px;
+        margin-top: 0px;
+        padding: 0px;
+    }
+
+    .content {
+        width: 100%;
+    }
+
+    ul li a {
+        text-align: center;
+    }
+
+    ul li {
+            padding-left: 0px;
+    }
+
+
+
+    /*add-event.html*/
+
+    .form-content ul li {
+        list-style: none;
+        padding-left: 30px;
+        line-height: 60px;
+        border: none;
+    }
+
+    .form-content ul input {
+        width: 100%;
+    }
+
+    .form-content input[name="details"] {
+        height: 100px;
+        width: 100%;
+    }
+
+    .form-content select {
+        width: 100%;
+    }
+
+    /*export-data.html*/
+
+}

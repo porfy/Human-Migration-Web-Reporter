@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Human Migration Report Tool</title>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="main.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body class="body">
+
+	<div class="top-nav">
+		<img src="img/search.png" alt="search-icon" class="search-icon">
+		<input type="text" placeholder="Search..">
+	</div>
+
+	<div class="side-nav">
+		<a href="#home"><img src="img/logo.png" alt="logo-icon" id="logo-icon"></a>
+			<ul>
+				<li><a href="user.html">My Profile</a></li>
+				<li><a href="add-event.html">Add Event</a></li>
+				<li><a href="export-data.html">Export Data</a></li>
+				<li><a href="intro.html">Log out</a></li>
+				<li><a href="contact.html">Contact Us</a></li>
+			</ul>
+	</div>
+
+	<div class="main-content">
+		<div class="form-content">
+			<h1>ADD A NEW MIGRATION EVENT</h1>
+			<h2>Complete the form below with details about the migration event</h2>
+			<div class="formular">
+				<ul>
+					<li>Event name: </li>
+					<li><input type="text" name="event-name"></li>
+
+					<li>Date of the event: </li>
+					<li><input type="date" name="event-date"></li>
+
+					<li>From what country: </li>
+					<li><select>
+	  					<option value="volvo">Romania</option>
+						<option value="saab">Italia</option>
+						<option value="opel">Spania</option>
+						<option value="audi">Coreea de Nord</option>
+					</select></li>
+
+					<li>To what country:</li>
+					<li><select>
+	  					<option value="volvo">Romania</option>
+						<option value="saab">Italia</option>
+						<option value="opel">Spania</option>
+						<option value="audi">Coreea de Nord</option>
+					</select></li>
+
+					<li>Other details:</li>
+					<li><input type="text" name="details"></li>
+				</ul>
+			</div>
+			<a href="main.html" id="back-button">Go back to the main page</a>
+			
+		</div>
+	</div>
+</body>
+</html>
