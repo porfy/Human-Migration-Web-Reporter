@@ -46,6 +46,10 @@ Route::set("register-submit",function(){
     $controller= new Register();
     $controller->signup();
 });
+Route::set("login-submit",function(){
+    $controller = new Login();
+    $controller ->loginf();
+});
     // sper ca vezi ca funtion aia e o functie pe care o scrii aici direct da se observa
 // aici pur si simplu apelezi functia set avand ca parametri numele rutei (aici main) si o functie... functia aia reprezinta ce vrei
 // tu sa faci cand ai accesat o anumita ruta
