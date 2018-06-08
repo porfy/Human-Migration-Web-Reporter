@@ -14,16 +14,16 @@
 		<input type="text" placeholder="Search..">
 	</div>
 
-	<div class="side-nav">
-		<a href="#home"><img src="img/logo.png" alt="logo-icon" id="logo-icon"></a>
-			<ul>
-				<li><a href="user.html">My Profile</a></li>
-				<li><a href="add-event.html">Add Event</a></li>
-				<li><a href="#export-data.html">Export Data</a></li>
-				<li><a href="intro.html">Log out</a></li>
-				<li><a href="contact.html">Contact Us</a></li>
-			</ul>
-	</div>
+    <div class="side-nav">
+        <a href="main"><img src="img/logo.png" alt="logo-icon" id="logo-icon"></a>
+        <ul>
+            <li><a href="user">My Profile</a></li>
+            <li><a href="add-event">Add Event</a></li>
+            <li><a href="export-data">Export Data</a></li>
+            <li><a href="logout">Log out</a></li>
+            <li><a href="contact">Contact Us</a></li>
+        </ul>
+    </div>
 
 	<div class="main-content">
 		<div class="form-content">

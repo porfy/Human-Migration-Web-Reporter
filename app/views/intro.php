@@ -1,3 +1,7 @@
+<?php
+session_start();
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,8 +14,8 @@
 		<div class="interior">
 			<div class="content">
 				<h1>Welcome to Human Migration Web Reporter</h1>
-				<a class="btn" href="register.html">Register</a>
-				<a class="btn" href="login.html">Log in</a>
+				<a class="btn" href="register">Register</a>
+				<a class="btn" href="login">Log in</a>
 			</div>
 		</div>
 	</section>

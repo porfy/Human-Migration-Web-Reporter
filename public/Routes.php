@@ -36,6 +36,10 @@ Route::set("add-event",function (){
     $controller = new Addevent();
     $controller -> index();
 });
+Route::set("logout",function (){
+    $controller = new Logout();
+    $controller ->index();
+});
 
 Route::set("export-data",function (){
     $controller = new Exportdata();
@@ -50,12 +54,4 @@ Route::set("login-submit",function(){
     $controller = new Login();
     $controller ->loginf();
 });
-    // sper ca vezi ca funtion aia e o functie pe care o scrii aici direct da se observa
-// aici pur si simplu apelezi functia set avand ca parametri numele rutei (aici main) si o functie... functia aia reprezinta ce vrei
-// tu sa faci cand ai accesat o anumita ruta
-
-// ai serverul pronit?
-// nu stiu cum ai setat tu in config.... stai o sec
-// am dat rau pathul catre main.html...
-// aici... cum e aia doar ca difera ce controller creezi
-//alta pagina alt controller... deocamdata controllerele sunt la fel ... difera doar parametrul
+    

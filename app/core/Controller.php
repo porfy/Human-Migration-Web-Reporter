@@ -6,7 +6,7 @@ class Controller{
     }
 
     public function view($view, $data = []){
-        require_once '../app/views/' . $view . '.html';
+        require_once '../app/views/' . $view . '.php';
     }
     // functia view nu face decat sa ceara o anumita pagina... adica sa o afiseze gen... tu le ai taote html asa ca le las asa deocamdata
 }

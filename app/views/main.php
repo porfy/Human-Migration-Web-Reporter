@@ -1,3 +1,9 @@
+<?php
+    session_start();
+    if(!isset($_SESSION['loged_in'])){
+        header('Location: login');
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,24 +13,27 @@
 	<link rel="stylesheet" type="text/css" href="main.css">
 	<link rel="stylesheet" type="text/css" href="leaflet/leaflet.css">
 	<link rel="script" type="text/css" href="leaflet/leaflet.js">
-	<link rel="stylesheet" type="text/css" href="leaflet/Control.Geocoder.js">
+	<link rel="stylesheet" type="text/css" href="leaflet/Control.Geocoder.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body class="body">
 
 	<div class="top-nav">
-		<img src="img/search.png" alt="search-icon" class="search-icon">
+        <?php
+         echo $_SESSION['loged_in'];
+        ?>
+        <img src="img/search.png" alt="search-icon" class="search-icon">
 		<input type="text" placeholder="Search..">
 	</div>
 
 	<div class="side-nav">
-		<a href="#home"><img src="img/logo.png" alt="logo-icon" id="logo-icon"></a>
+		<a href="main"><img src="img/logo.png" alt="logo-icon" id="logo-icon"></a>
 			<ul>
-				<li><a href="user.html">My Profile</a></li>
-				<li><a href="add-event.html">Add Event</a></li>
-				<li><a href="export-data.html">Export Data</a></li>
-				<li><a href="intro.html">Log out</a></li>
-				<li><a href="contact.html">Contact Us</a></li>
+				<li><a href="user">My Profile</a></li>
+				<li><a href="add-event">Add Event</a></li>
+				<li><a href="export-data">Export Data</a></li>
+				<li><a href="logout">Log out</a></li>
+				<li><a href="contact">Contact Us</a></li>
 			</ul>
 	</div>
 

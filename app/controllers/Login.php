@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 class Login extends Controller{
     public function index(){
         $this->view("login");
@@ -14,7 +14,8 @@ class Login extends Controller{
             $result=mysqli_query($conn,$sql);
             $resultCheck= mysqli_num_rows($result);
             if($resultCheck < 1){
-                header("Location: login?log=error");
+                $_SESSION['Error']="UsErnamE sau parola grEsita!";
+                header("Location: login");
                 exit();
             }
             else{
@@ -22,10 +23,13 @@ class Login extends Controller{
                     //de-hashing the password
                     $hashedPwdCheck= password_verify($password,$row['password']);
                     if($hashedPwdCheck==false){
-                        header("Location: login?log=error");
+                        $_SESSION['Error']="UsErnamE sau parola grEsita!";
+                        header("Location: login");
                         exit();
                     }
                     elseif($hashedPwdCheck==true){
+                        $_SESSION['username']=$username;
+                        $_SESSION['loged_in']='true';
                         header("Location: main");
                         exit();
                     }
