@@ -54,4 +54,9 @@ Route::set("login-submit",function(){
     $controller = new Login();
     $controller ->loginf();
 });
+
+Route::set("event_submit",function(){
+    $controller = new Addevent();
+    $controller ->add();
+});
     

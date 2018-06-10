@@ -7,7 +7,7 @@ class Register extends Controller{
 
     public function signup(){
         if(isset($_POST['submit'])){
-            include_once 'dbconn.php';
+            $conn=Database::getConection();
             $first=mysqli_real_escape_string($conn ,$_POST['first']);
             $last=mysqli_real_escape_string($conn ,$_POST['last']);
             $country=mysqli_real_escape_string($conn ,$_POST['country']);
@@ -46,6 +46,7 @@ class Register extends Controller{
                             $sql="insert into users (username,password,firstname,lastname,email,country) values('$username','$hashedPwd','$first','$last','$email','$country')";
                             mysqli_query($conn,$sql);
                             header("Location: main");
+                            $conn->close();
                             exit();
                         }
                     }

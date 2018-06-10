@@ -14,7 +14,9 @@
                 <?php
                 if(isset($_SESSION['Error'])){
                     Echo $_SESSION['Error'];
+                    Echo $_SESSION['Time'];
                     unset($_SESSION['Error']);
+                    unset($_SESSION['Time']);
                 }
                 ?>
             </div>
