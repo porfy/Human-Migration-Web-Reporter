@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 class Register extends Controller{
     public function index(){
         $this->view("register");
@@ -37,7 +37,8 @@ class Register extends Controller{
                         $result = mysqli_query($conn,$sql);
                         $resultCheck=mysqli_num_rows($result);
                         if($resultCheck > 0){
-                            header("Location: register?signup=usertaken");
+                            $_SESSION['error']="Alege alt username!";
+                            header("Location: register");
                             exit();
                         }
                         else{

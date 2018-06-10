@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +14,14 @@
 	<form action="register-submit" method="POST">
 		<div class="register-box" >
 			<h1>Sign up</h1>
-
+            <div class="error">
+                <?php
+                    if(isset($_SESSION['error'])){
+                        echo $_SESSION['error'];
+                        unset($_SESSION['error']);
+                    }
+                ?>
+            </div>
 			<p>First name</p>
 			<input type="text" name="first" placeholder="Name">
 

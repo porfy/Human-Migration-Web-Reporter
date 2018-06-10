@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 class Migratie{
 
@@ -159,4 +160,167 @@ class Migratie{
     }
 }
 
+=======
+<?php
+class Migratie{
+
+    protected $id;
+    protected $locPlecare;
+    protected $locDestinatie;
+    protected $nrAdulti;
+    protected $nrCopii;
+    protected $motiv;
+    protected $dataPlecare;
+    protected $dataPostare;
+    protected $descriere;
+
+    /**
+     * @return mixed
+     */
+    public function insert(){
+        require_once '../controllers/Database.php';
+        $id=$_SESSION['user_id'];
+
+    }
+    public function getDescriere()
+    {
+        return $this->descriere;
+    }
+
+    /**
+     * @param mixed $descriere
+     */
+    public function setDescriere($descriere)
+    {
+        $this->descriere = $descriere;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLocPlecare()
+    {
+        return $this->locPlecare;
+    }
+
+    /**
+     * @param mixed $locPlecare
+     */
+    public function setLocPlecare($locPlecare)
+    {
+        $this->locPlecare = $locPlecare;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLocDestinatie()
+    {
+        return $this->locDestinatie;
+    }
+
+    /**
+     * @param mixed $locDestinatie
+     */
+    public function setLocDestinatie($locDestinatie)
+    {
+        $this->locDestinatie = $locDestinatie;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNrAdulti()
+    {
+        return $this->nrAdulti;
+    }
+
+    /**
+     * @param mixed $nrAdulti
+     */
+    public function setNrAdulti($nrAdulti)
+    {
+        $this->nrAdulti = $nrAdulti;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNrCopii()
+    {
+        return $this->nrCopii;
+    }
+
+    /**
+     * @param mixed $nrCopii
+     */
+    public function setNrCopii($nrCopii)
+    {
+        $this->nrCopii = $nrCopii;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMotiv()
+    {
+        return $this->motiv;
+    }
+
+    /**
+     * @param mixed $motiv
+     */
+    public function setMotiv($motiv)
+    {
+        $this->motiv = $motiv;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDataPlecare()
+    {
+        return $this->dataPlecare;
+    }
+
+    /**
+     * @param mixed $dataPlecare
+     */
+    public function setDataPlecare($dataPlecare)
+    {
+        $this->dataPlecare = $dataPlecare;
+    }
+
+
+    public function getDataPostare()
+    {
+        return $this->dataPostare;
+    }
+
+    /**
+     * @param mixed $dataPostare
+     */
+    public function setDataPostare($dataPostare)
+    {
+        $this->dataPostare = $dataPostare;
+    }
+}
+
+>>>>>>> 217c41f895d578695630d934932a075827eaa2af
 ?>

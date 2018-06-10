@@ -10,7 +10,7 @@
 	<body>
 
 		<div class="login-box">
-            <div class="Error">
+            <div class="error">
                 <?php
                 if(isset($_SESSION['Error'])){
                     Echo $_SESSION['Error'];
