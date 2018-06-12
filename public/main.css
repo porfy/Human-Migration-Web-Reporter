@@ -62,7 +62,6 @@ body {
 
 .main-content {
     overflow: hidden;
-    float: left;
     margin-left: 20%;
     margin-top: 25px;
     padding: 30px;
@@ -127,18 +126,18 @@ ul {
 
 ul li {
     list-style: none;
-    border-bottom: 1px solid #4E5F70;
+    border-bottom: 1px solid rgba(181, 179, 181, 0.28);
     padding-left: 30px;
     line-height: 60px;
 }
 
 ul li:hover {
-    background-color: #57C3E8 ;
+    background-color: #d0e8dd;
 }
 
 ul li a {
     text-decoration: none;
-    color: #2B3655;
+    color: #9a9a92;
     display: block;
     line-height: 60px;
 }
@@ -168,6 +167,20 @@ p {
 
 /*add-event.html*/
 
+.info leaflet-bar leaflet-control {
+
+}
+
+#map_event {
+    width: 100%;
+    height: 700px;
+}
+
+.form-content {
+    padding: 0px;
+    border: 0px;
+}
+
 .form-content ul li {
     list-style: none;
     padding-left: 0px;
@@ -180,16 +193,26 @@ p {
 }
 
 .form-content ul input {
-    width: 50%;
+    width: 100%;
 }
 
-.form-content input[name="details"] {
+.form-content input[name="descriere"] {
     height: 100px;
 }
 
 .formular {
-    background-color: #dff3e2 ;
+    background-color: #ffffff ;
     padding: 10px;
+    width: 250px;
+}
+
+.formular ul li {
+    line-height: 24px;
+    padding: 0px 0px 0px 0px;
+}
+
+.formular ul li:hover {
+    background-color: #ffffff;
 }
 
 #back-button {
@@ -256,26 +279,30 @@ p {
     }
 
     ul li {
-            padding-left: 0px;
+        padding-left: 0px;
     }
 
 
 
     /*add-event.html*/
+    #map_event {
+        width: 100%;
+        height: 400px;
+    }
+
+    .form-content {
+
+    }
 
     .form-content ul li {
         list-style: none;
-        padding-left: 30px;
-        line-height: 60px;
+        padding-left: 0px;
+        line-height: 20px;
         border: none;
     }
 
-    .form-content ul input {
-        width: 100%;
-    }
-
-    .form-content input[name="details"] {
-        height: 100px;
+    .form-content input[name="descriere"] {
+        height: 25px;
         width: 100%;
     }
 
@@ -285,4 +312,7 @@ p {
 
     /*export-data.html*/
 
+    .hidden {
+        border: 100px;
+    }
 }

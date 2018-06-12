@@ -14,11 +14,10 @@ class Login extends Controller{
             $result=mysqli_query($conn,$sql);
             $resultCheck= mysqli_num_rows($result);
             if($resultCheck < 1){
-<<<<<<< HEAD
+
                 $_SESSION['Error']="Username sau parola gresita!";
-=======
+
                 $_SESSION['Error']="UsErnamE sau parola grEsita!";
->>>>>>> 217c41f895d578695630d934932a075827eaa2af
                 $_SESSION['Time']=date("m/d/Y h:i:s a", time());
                 header("Location: login");
                 exit();

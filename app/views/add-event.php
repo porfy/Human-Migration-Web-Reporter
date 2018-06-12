@@ -1,21 +1,13 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <title>Human Migration Report Tool</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-	<title>Human Migration Report Tool</title>
-	<meta charset="utf-8"/>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" type="text/css" href="main.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <<!-- Load Leaflet from CDN-->
+    <!-- Load Leaflet from CDN-->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet-src.js"></script>
 
@@ -25,6 +17,8 @@
     <!-- Esri Leaflet Geocoder -->
     <link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder@2.2.9/dist/esri-leaflet-geocoder.css">
     <script src="https://unpkg.com/esri-leaflet-geocoder@2.2.8"></script>
+
+    <script src="leaflet/leaflet.ajax.min.js"></script>
 
 </head>
 <body class="body">
@@ -47,25 +41,19 @@
 
 <div class="main-content">
 
-
     <div class="form-content">
         <h1>ADD A NEW MIGRATION EVENT</h1>
-        <h2>Complete the form below with details about the migration event</h2>
-
-        <div id="map_event" style="width:600px; height: 400px;">
+        <div id="map_event">
             <script>
                 var plecare, destinatie;
-                //initialize map
                 var map = new L.map('map_event').setView([0, 0], 2);
                 var geocodeService = L.esri.Geocoding.geocodeService();
-                var tiles = L.esri.basemapLayer("Streets").addTo(map);
-                // create the geocoding control and add it to the map
-                var searchControl1 = L.esri.Geocoding.geosearch().addTo(map);
-                var searchControl2 = L.esri.Geocoding.geosearch().addTo(map);
-                // create an empty layer group to store the results and add it to the map
+                var tiles = L.esri.basemapLayer("Gray").addTo(map);
+                var searchControlPlecare = L.esri.Geocoding.geosearch({expanded:true, placeholder:'migration origin', position: 'topright'}).addTo(map);
+                var searchControlDestinatie = L.esri.Geocoding.geosearch({expanded:true, placeholder:'migration destination', position: 'topright'}).addTo(map);
                 var results = L.layerGroup().addTo(map);
-                // listen for the results event and add every result to the map
-                searchControl1.on("results", function(data) {
+
+                searchControlPlecare.on("results", function(data) {
                     results.clearLayers();
                     plecare = data.results[0].latlng;
                     results.addLayer(L.marker(plecare));
@@ -73,7 +61,8 @@
                         document.getElementById("plecare").value = result.address.CountryCode;
                     })
                 });
-                searchControl2.on("results", function(data) {
+
+                searchControlDestinatie.on("results", function(data) {
                     results.clearLayers();
                     destinatie = data.results[0].latlng;
                     results.addLayer(L.marker(plecare));
@@ -82,548 +71,72 @@
                         document.getElementById("destinatie").value = result.address.CountryCode;
                     })
                 });
+
+                //GEOCODE BY COUNTRYCODE TEXT
+                var latlngs = Array();
+                var locc1 = 'FRA';
+                var locc2 = 'ROU';
+                var locc1_marker, locc2_marker;
+
+                var test = L.esri.Geocoding.geocode().text(locc1).run(function(err, rezultat, response){
+                    locc1_marker = L.marker(rezultat.results[0].latlng);
+                    results.addLayer(locc1_marker);
+                    latlngs.push(locc1_marker.getLatLng());
+                });
+
+                var test2 = L.esri.Geocoding.geocode().text(locc2).run(function(err, rezultat, response){
+                    locc2_marker = L.marker(rezultat.results[0].latlng);
+                    results.addLayer(locc2_marker);
+                    latlngs.push(locc2_marker.getLatLng());
+                    var polyline = L.polyline(latlngs, {color: 'blue', weight:3, opacity:0.5, smoothFactor: 1});
+                    polyline.addTo(map);
+                });
+
+
+
+
+                //add instructions
+                var addInstructions = function(map) {
+                    var info = L.control({position: 'topright'});
+
+                    info.onAdd = function (map) {
+                        this._div = L.DomUtil.create('div', 'info leaflet-bar'); // create a div with a class "info"
+                        this.update();
+                        return this._div;
+                    };
+
+                    // method that we will use to update the control based on feature properties passed
+                    info.update = function (props) {
+                        this._div.innerHTML = '<div class="formular">\n' +
+                            '            <form action="event_submit" method="post">\n' +
+                            '                <ul>\n' +
+                            '                    <li>Loc plecare: </li>\n' +
+                            '                    <li><input type="text" id="plecare" name="loc_plecare"></li>\n' +
+                            '                    <li>Loc destinatie: </li>\n' +
+                            '                    <li><input type="text" id="destinatie" name="loc_destinatie"></li>\n' +
+                            '                    <li>Nr. adulti: </li>\n' +
+                            '                    <li><input type="text" name="nr_adulti"></li>\n' +
+                            '                    <li>Nr. copii: </li>\n' +
+                            '                    <li><input type="text" name="nr_copii"></li>\n' +
+                            '                    <li>Motiv: </li>\n' +
+                            '                    <li><input type="text" name="motiv"></li>\n' +
+                            '                    <li>Data eveniment: </li>\n' +
+                            '                    <li><input type="date" name="data_eveniment"></li>\n' +
+                            '                    <li>Descriere:</li>\n' +
+                            '                    <li><input type="text" name="descriere"></li>\n' +
+                            '                    <button type="submit" name="submit">Add Event</button>\n' +
+                            '                </ul>\n' +
+                            '            </form>\n' +
+                            '        </div>';
+                    };
+                    info.addTo(map);
+                }
+
+                addInstructions(map);
             </script>
         </div>
-
-        <div class="formular">
-            <form action="event_submit" method="post">
-                <ul>
-                    <li>Loc plecare: </li>
-                    <li ><input type="text" id="plecare" name="loc_plecare"></li>
-
-                    <li>Loc destinatie: </li>
-                    <li><input type="text" id="destinatie" name="loc_destinatie"></li>
-
-                    <li>Nr. adulti: </li>
-                    <li><input type="text" name="nr_adulti"></li>
-
-                    <li>Nr. copii: </li>
-                    <li><input type="text" name="nr_copii"></li>
-
-                    <li>Motiv: </li>
-                    <li><input type="text" name="motiv"></li>
-
-                    <li>Data eveniment: </li>
-                    <li><input type="date" name="data_eveniment"></li>
-
-                    <li>Descriere:</li>
-                    <li><input type="text" name="descriere"></li>
-                    <button type="submit" name="submit">Add Event</button>
-                </ul>
-            </form>
-        </div>
-
-        <a href="main.html" id="back-button">Go back to the main page</a>
-
     </div>
+    <a href="main.html" id="back-button">Go back to the main page</a>
 </div>
 </body>
-</html><!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Human Migration Report Tool</title>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="main.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-<<<<<<< HEAD
-    <<!-- Load Leaflet from CDN-->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet-src.js"></script>
-
-    <!-- Load Esri Leaflet from CDN -->
-    <script src="https://unpkg.com/esri-leaflet@2.1.3"></script>
-
-    <!-- Esri Leaflet Geocoder -->
-    <link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder@2.2.9/dist/esri-leaflet-geocoder.css">
-    <script src="https://unpkg.com/esri-leaflet-geocoder@2.2.8"></script>
-
-</head>
-<body class="body">
-
-<div class="top-nav">
-    <img src="img/search.png" alt="search-icon" class="search-icon">
-    <input type="text" placeholder="Search..">
-</div>
-
-<div class="side-nav">
-    <a href="main"><img src="img/logo.png" alt="logo-icon" id="logo-icon"></a>
-    <ul>
-        <li><a href="user">My Profile</a></li>
-        <li><a href="add-event">Add Event</a></li>
-        <li><a href="export-data">Export Data</a></li>
-        <li><a href="logout">Log out</a></li>
-        <li><a href="contact">Contact Us</a></li>
-    </ul>
-</div>
-
-<div class="main-content">
-
-
-    <div class="form-content">
-        <h1>ADD A NEW MIGRATION EVENT</h1>
-        <h2>Complete the form below with details about the migration event</h2>
-
-        <div id="map_event" style="width:600px; height: 400px;">
-            <script>
-                var plecare, destinatie;
-                //initialize map
-                var map = new L.map('map_event').setView([0, 0], 2);
-                var geocodeService = L.esri.Geocoding.geocodeService();
-                var tiles = L.esri.basemapLayer("Streets").addTo(map);
-                // create the geocoding control and add it to the map
-                var searchControl1 = L.esri.Geocoding.geosearch().addTo(map);
-                var searchControl2 = L.esri.Geocoding.geosearch().addTo(map);
-                // create an empty layer group to store the results and add it to the map
-                var results = L.layerGroup().addTo(map);
-                // listen for the results event and add every result to the map
-                searchControl1.on("results", function(data) {
-                    results.clearLayers();
-                    plecare = data.results[0].latlng;
-                    results.addLayer(L.marker(plecare));
-                    geocodeService.reverse().latlng(plecare).run(function(error, result) {
-                        document.getElementById("plecare").value = result.address.CountryCode;
-                    })
-                });
-                searchControl2.on("results", function(data) {
-                    results.clearLayers();
-                    destinatie = data.results[0].latlng;
-                    results.addLayer(L.marker(plecare));
-                    results.addLayer(L.marker(destinatie));
-                    geocodeService.reverse().latlng(destinatie).run(function(error, result) {
-                        document.getElementById("destinatie").value = result.address.CountryCode;
-                    })
-                });
-            </script>
-        </div>
-
-        <div class="formular">
-            <form action="event_submit" method="get">
-                <ul>
-                    <li>Loc plecare: </li>
-                    <li ><input type="text" id="plecare" name="loc_plecare"></li>
-
-                    <li>Loc destinatie: </li>
-                    <li><input type="text" id="destinatie" name="loc_destinatie"></li>
-
-                    <li>Nr. adulti: </li>
-                    <li><input type="text" name="nr_adulti"></li>
-
-                    <li>Nr. copii: </li>
-                    <li><input type="text" name="nr_copii"></li>
-
-                    <li>Motiv: </li>
-                    <li><input type="text" name="motiv"></li>
-
-                    <li>Data eveniment: </li>
-                    <li><input type="date" name="data_eveniment"></li>
-
-                    <li>Descriere:</li>
-                    <li><input type="text" name="descriere"></li>
-                    <button type="submit" name="addEvent">Add Event</button>
-                </ul>
-            </form>
-        </div>
-
-        <a href="main.html" id="back-button">Go back to the main page</a>
-
-    </div>
-</div>
-=======
-	<div class="main-content">
-
-
-		<div class="form-content">
-			<h1>ADD A NEW MIGRATION EVENT</h1>
-			<h2>Complete the form below with details about the migration event</h2>
-
-            <div id="map_event" style="width:600px; height: 400px;">
-                <script>
-                    var plecare, destinatie;
-
-                    //initialize map
-                    var map = new L.map('map_event').setView([0, 0], 2);
-                    var geocodeService = L.esri.Geocoding.geocodeService();
-                    var tiles = L.esri.basemapLayer("Streets").addTo(map);
-
-                    // create the geocoding control and add it to the map
-                    var searchControl1 = L.esri.Geocoding.geosearch().addTo(map);
-                    var searchControl2 = L.esri.Geocoding.geosearch().addTo(map);
-
-                    // create an empty layer group to store the results and add it to the map
-                    var results = L.layerGroup().addTo(map);
-
-                    // listen for the results event and add every result to the map
-                    searchControl1.on("results", function(data) {
-                        results.clearLayers();
-                        plecare = data.results[0].latlng;
-                        results.addLayer(L.marker(plecare));
-                        geocodeService.reverse().latlng(plecare).run(function(error, result) {
-                            document.getElementById("plecare").value = result.address.CountryCode;
-                        })
-                    });
-
-                    searchControl2.on("results", function(data) {
-                        results.clearLayers();
-                        destinatie = data.results[0].latlng;
-                        results.addLayer(L.marker(plecare));
-                        results.addLayer(L.marker(destinatie));
-                        geocodeService.reverse().latlng(destinatie).run(function(error, result) {
-                            document.getElementById("destinatie").value = result.address.CountryCode;
-                            })
-                    });
-
-                </script>
-            </div>
-
-			<div class="formular">
-                <form action="event_submit" method="get">
-                    <ul>
-                        <li>Loc plecare: </li>
-                        <li ><input type="text" id="plecare" name="loc_plecare"></li>
-
-                        <li>Loc destinatie: </li>
-                        <li><input type="text" id="destinatie" name="loc_destinatie"></li>
-
-                        <li>Nr. adulti: </li>
-                        <li><input type="text" name="nr_adulti"></li>
-
-                        <li>Nr. copii: </li>
-                        <li><input type="text" name="nr_copii"></li>
-
-                        <li>Motiv: </li>
-                        <li><input type="text" name="motiv"></li>
-
-                        <li>Data eveniment: </li>
-                        <li><input type="date" name="data_eveniment"></li>
-
-                        <li>Descriere:</li>
-                        <li><input type="text" name="descriere"></li>
-                        <button type="submit" name="addEvent">Add Event</button>
-                    </ul>
-                </form>
-			</div>
-
-			<a href="main.html" id="back-button">Go back to the main page</a>
-			
-		</div>
-	</div>
->>>>>>> eceb8c79244ec3715c9c6a7acc046ec9a0634a10
-</body>
-=======
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<<<<<<< HEAD
-    <title>Human Migration Report Tool</title>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="main.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-=======
-	<title>Human Migration Report Tool</title>
-	<meta charset="utf-8"/>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" type="text/css" href="main.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
->>>>>>> eceb8c79244ec3715c9c6a7acc046ec9a0634a10
-
-    <<!-- Load Leaflet from CDN-->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet-src.js"></script>
-
-    <!-- Load Esri Leaflet from CDN -->
-    <script src="https://unpkg.com/esri-leaflet@2.1.3"></script>
-
-    <!-- Esri Leaflet Geocoder -->
-    <link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder@2.2.9/dist/esri-leaflet-geocoder.css">
-    <script src="https://unpkg.com/esri-leaflet-geocoder@2.2.8"></script>
-
-</head>
-<body class="body">
-
-<div class="top-nav">
-    <img src="img/search.png" alt="search-icon" class="search-icon">
-    <input type="text" placeholder="Search..">
-</div>
-
-<div class="side-nav">
-    <a href="main"><img src="img/logo.png" alt="logo-icon" id="logo-icon"></a>
-    <ul>
-        <li><a href="user">My Profile</a></li>
-        <li><a href="add-event">Add Event</a></li>
-        <li><a href="export-data">Export Data</a></li>
-        <li><a href="logout">Log out</a></li>
-        <li><a href="contact">Contact Us</a></li>
-    </ul>
-</div>
-
-<div class="main-content">
-
-
-    <div class="form-content">
-        <h1>ADD A NEW MIGRATION EVENT</h1>
-        <h2>Complete the form below with details about the migration event</h2>
-
-        <div id="map_event" style="width:600px; height: 400px;">
-            <script>
-                var plecare, destinatie;
-                //initialize map
-                var map = new L.map('map_event').setView([0, 0], 2);
-                var geocodeService = L.esri.Geocoding.geocodeService();
-                var tiles = L.esri.basemapLayer("Streets").addTo(map);
-                // create the geocoding control and add it to the map
-                var searchControl1 = L.esri.Geocoding.geosearch().addTo(map);
-                var searchControl2 = L.esri.Geocoding.geosearch().addTo(map);
-                // create an empty layer group to store the results and add it to the map
-                var results = L.layerGroup().addTo(map);
-                // listen for the results event and add every result to the map
-                searchControl1.on("results", function(data) {
-                    results.clearLayers();
-                    plecare = data.results[0].latlng;
-                    results.addLayer(L.marker(plecare));
-                    geocodeService.reverse().latlng(plecare).run(function(error, result) {
-                        document.getElementById("plecare").value = result.address.CountryCode;
-                    })
-                });
-                searchControl2.on("results", function(data) {
-                    results.clearLayers();
-                    destinatie = data.results[0].latlng;
-                    results.addLayer(L.marker(plecare));
-                    results.addLayer(L.marker(destinatie));
-                    geocodeService.reverse().latlng(destinatie).run(function(error, result) {
-                        document.getElementById("destinatie").value = result.address.CountryCode;
-                    })
-                });
-            </script>
-        </div>
-
-        <div class="formular">
-            <form action="event_submit" method="post">
-                <ul>
-                    <li>Loc plecare: </li>
-                    <li ><input type="text" id="plecare" name="loc_plecare"></li>
-
-                    <li>Loc destinatie: </li>
-                    <li><input type="text" id="destinatie" name="loc_destinatie"></li>
-
-                    <li>Nr. adulti: </li>
-                    <li><input type="text" name="nr_adulti"></li>
-
-                    <li>Nr. copii: </li>
-                    <li><input type="text" name="nr_copii"></li>
-
-                    <li>Motiv: </li>
-                    <li><input type="text" name="motiv"></li>
-
-                    <li>Data eveniment: </li>
-                    <li><input type="date" name="data_eveniment"></li>
-
-                    <li>Descriere:</li>
-                    <li><input type="text" name="descriere"></li>
-                    <button type="submit" name="submit">Add Event</button>
-                </ul>
-            </form>
-        </div>
-
-        <a href="main.html" id="back-button">Go back to the main page</a>
-
-    </div>
-</div>
-</body>
-</html><!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Human Migration Report Tool</title>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="main.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-<<<<<<< HEAD
-    <<!-- Load Leaflet from CDN-->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet-src.js"></script>
-
-    <!-- Load Esri Leaflet from CDN -->
-    <script src="https://unpkg.com/esri-leaflet@2.1.3"></script>
-
-    <!-- Esri Leaflet Geocoder -->
-    <link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder@2.2.9/dist/esri-leaflet-geocoder.css">
-    <script src="https://unpkg.com/esri-leaflet-geocoder@2.2.8"></script>
-
-</head>
-<body class="body">
-
-<div class="top-nav">
-    <img src="img/search.png" alt="search-icon" class="search-icon">
-    <input type="text" placeholder="Search..">
-</div>
-
-<div class="side-nav">
-    <a href="main"><img src="img/logo.png" alt="logo-icon" id="logo-icon"></a>
-    <ul>
-        <li><a href="user">My Profile</a></li>
-        <li><a href="add-event">Add Event</a></li>
-        <li><a href="export-data">Export Data</a></li>
-        <li><a href="logout">Log out</a></li>
-        <li><a href="contact">Contact Us</a></li>
-    </ul>
-</div>
-
-<div class="main-content">
-
-
-    <div class="form-content">
-        <h1>ADD A NEW MIGRATION EVENT</h1>
-        <h2>Complete the form below with details about the migration event</h2>
-
-        <div id="map_event" style="width:600px; height: 400px;">
-            <script>
-                var plecare, destinatie;
-                //initialize map
-                var map = new L.map('map_event').setView([0, 0], 2);
-                var geocodeService = L.esri.Geocoding.geocodeService();
-                var tiles = L.esri.basemapLayer("Streets").addTo(map);
-                // create the geocoding control and add it to the map
-                var searchControl1 = L.esri.Geocoding.geosearch().addTo(map);
-                var searchControl2 = L.esri.Geocoding.geosearch().addTo(map);
-                // create an empty layer group to store the results and add it to the map
-                var results = L.layerGroup().addTo(map);
-                // listen for the results event and add every result to the map
-                searchControl1.on("results", function(data) {
-                    results.clearLayers();
-                    plecare = data.results[0].latlng;
-                    results.addLayer(L.marker(plecare));
-                    geocodeService.reverse().latlng(plecare).run(function(error, result) {
-                        document.getElementById("plecare").value = result.address.CountryCode;
-                    })
-                });
-                searchControl2.on("results", function(data) {
-                    results.clearLayers();
-                    destinatie = data.results[0].latlng;
-                    results.addLayer(L.marker(plecare));
-                    results.addLayer(L.marker(destinatie));
-                    geocodeService.reverse().latlng(destinatie).run(function(error, result) {
-                        document.getElementById("destinatie").value = result.address.CountryCode;
-                    })
-                });
-            </script>
-        </div>
-
-        <div class="formular">
-            <form action="event_submit" method="get">
-                <ul>
-                    <li>Loc plecare: </li>
-                    <li ><input type="text" id="plecare" name="loc_plecare"></li>
-
-                    <li>Loc destinatie: </li>
-                    <li><input type="text" id="destinatie" name="loc_destinatie"></li>
-
-                    <li>Nr. adulti: </li>
-                    <li><input type="text" name="nr_adulti"></li>
-
-                    <li>Nr. copii: </li>
-                    <li><input type="text" name="nr_copii"></li>
-
-                    <li>Motiv: </li>
-                    <li><input type="text" name="motiv"></li>
-
-                    <li>Data eveniment: </li>
-                    <li><input type="date" name="data_eveniment"></li>
-
-                    <li>Descriere:</li>
-                    <li><input type="text" name="descriere"></li>
-                    <button type="submit" name="addEvent">Add Event</button>
-                </ul>
-            </form>
-        </div>
-
-        <a href="main.html" id="back-button">Go back to the main page</a>
-
-    </div>
-</div>
-=======
-	<div class="main-content">
-
-
-		<div class="form-content">
-			<h1>ADD A NEW MIGRATION EVENT</h1>
-			<h2>Complete the form below with details about the migration event</h2>
-
-            <div id="map_event" style="width:600px; height: 400px;">
-                <script>
-                    var plecare, destinatie;
-
-                    //initialize map
-                    var map = new L.map('map_event').setView([0, 0], 2);
-                    var geocodeService = L.esri.Geocoding.geocodeService();
-                    var tiles = L.esri.basemapLayer("Streets").addTo(map);
-
-                    // create the geocoding control and add it to the map
-                    var searchControl1 = L.esri.Geocoding.geosearch().addTo(map);
-                    var searchControl2 = L.esri.Geocoding.geosearch().addTo(map);
-
-                    // create an empty layer group to store the results and add it to the map
-                    var results = L.layerGroup().addTo(map);
-
-                    // listen for the results event and add every result to the map
-                    searchControl1.on("results", function(data) {
-                        results.clearLayers();
-                        plecare = data.results[0].latlng;
-                        results.addLayer(L.marker(plecare));
-                        geocodeService.reverse().latlng(plecare).run(function(error, result) {
-                            document.getElementById("plecare").value = result.address.CountryCode;
-                        })
-                    });
-
-                    searchControl2.on("results", function(data) {
-                        results.clearLayers();
-                        destinatie = data.results[0].latlng;
-                        results.addLayer(L.marker(plecare));
-                        results.addLayer(L.marker(destinatie));
-                        geocodeService.reverse().latlng(destinatie).run(function(error, result) {
-                            document.getElementById("destinatie").value = result.address.CountryCode;
-                            })
-                    });
-
-                </script>
-            </div>
-
-			<div class="formular">
-                <form action="event_submit" method="get">
-                    <ul>
-                        <li>Loc plecare: </li>
-                        <li ><input type="text" id="plecare" name="loc_plecare"></li>
-
-                        <li>Loc destinatie: </li>
-                        <li><input type="text" id="destinatie" name="loc_destinatie"></li>
-
-                        <li>Nr. adulti: </li>
-                        <li><input type="text" name="nr_adulti"></li>
-
-                        <li>Nr. copii: </li>
-                        <li><input type="text" name="nr_copii"></li>
-
-                        <li>Motiv: </li>
-                        <li><input type="text" name="motiv"></li>
-
-                        <li>Data eveniment: </li>
-                        <li><input type="date" name="data_eveniment"></li>
-
-                        <li>Descriere:</li>
-                        <li><input type="text" name="descriere"></li>
-                        <button type="submit" name="addEvent">Add Event</button>
-                    </ul>
-                </form>
-			</div>
-
-			<a href="main.html" id="back-button">Go back to the main page</a>
-			
-		</div>
-	</div>
->>>>>>> eceb8c79244ec3715c9c6a7acc046ec9a0634a10
-</body>
->>>>>>> 217c41f895d578695630d934932a075827eaa2af
-</html
+</html>

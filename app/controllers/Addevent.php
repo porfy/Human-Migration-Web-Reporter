@@ -30,7 +30,8 @@ class Addevent extends Controller{
         mysqli_query($conn, $sql);
         $conn->close();
         header("Location: main");
-    }
 
+        twitter::posteaza();
+    }
     }
 }

@@ -4,6 +4,7 @@
 
 Route::set("main",function(){
     $controller = new Main();
+    $controller->feed();
     $controller->index();
 });
 
