@@ -44,7 +44,8 @@ Route::set("logout",function (){
 });
 
 Route::set("export-data",function (){
-    $controller = new Exportdata();
+    $controller = new Exportdataa();
+    $controller->setChart();
     $controller ->index();
 });
 

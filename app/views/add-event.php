@@ -134,8 +134,12 @@ if(!isset($_SESSION['loged_in'])){
                             '                    <li><input type="text" name="nr_adulti"></li>\n' +
                             '                    <li>Nr. copii: </li>\n' +
                             '                    <li><input type="text" name="nr_copii"></li>\n' +
-                            '                    <li>Motiv: </li>\n' +
-                            '                    <li><input type="text" name="motiv"></li>\n' +
+                            '                    <li>Motiv: <select name="motiv">' +
+                            '                           <option value="saracie">economic</option>' +
+                            '                           <option value="razboi">razboi</option>' +
+                            '                           <option value="dezastre naturale">dezastre naturale</option>' +
+                            '                           <option value"altul">altul</option>' +
+                            '                           <option value="social politic">social-politic</option></select></li>\n' +
                             '                    <li>Data eveniment: </li>\n' +
                             '                    <li><input type="date" name="data_eveniment"></li>\n' +
                             '                    <li>Descriere:</li>\n' +
