@@ -37,9 +37,6 @@ if(!isset($_SESSION['loged_in'])){
     </div>
 
 	<div class="main-content">
-        <?php
-        echo $_SESSION['date'];
-        ?>
         <canvas id="myChart" width="400" height="200"></canvas>
         <script>
             var ctx = "myChart";

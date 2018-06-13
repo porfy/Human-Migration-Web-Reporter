@@ -7,6 +7,7 @@ class Register extends Controller{
 
     public function signup(){
         if(isset($_POST['submit'])){
+            require_once ('../app/models/Database.php');
             $conn=Database::getConection();
             $first=mysqli_real_escape_string($conn ,$_POST['first']);
             $last=mysqli_real_escape_string($conn ,$_POST['last']);

@@ -9,6 +9,7 @@ class User extends Controller
 
     public function info()
     {
+        require_once ('../app/models/Database.php');
         $conn = Database::getConection();
         $nrPostari = 0;
         $us = $_SESSION['username'];

@@ -6,7 +6,7 @@ class Login extends Controller{
     }
     public function loginf(){
         if(isset($_POST['submit'])){
-
+            require_once ('../app/models/Database.php');
             $conn=Database::getConection();
             $username=mysqli_real_escape_string($conn,$_POST['username']);
             $password=mysqli_real_escape_string($conn,$_POST['password']);

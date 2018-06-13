@@ -11,6 +11,7 @@ class Main extends Controller
 
     public function feed()
     {
+        require_once ('../app/models/Database.php');
         $xml = new DOMDocument();
         $conn=Database::getConection();
         $sql="select * from migration order by data_postare desc";
@@ -40,7 +41,7 @@ class Main extends Controller
             $post->appendChild($plecare);
             $post->appendChild($datapostare);
             $xml->appendChild( $post );
-            $xml->save('migration.xml');
+            $xml->save('../app/models/migration.xml');
         }
 
 

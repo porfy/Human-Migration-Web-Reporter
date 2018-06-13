@@ -6,10 +6,8 @@ class Addevent extends Controller{
         $this->view("add-event");
     }
     public function add(){
-
-
-
-    if(isset($_POST['submit'])){
+        require_once ('../app/models/Database.php');
+        if(isset($_POST['submit'])){
         $us=$_SESSION['username'];
         $conn=Database::getConection();
         $sql="select id from users  where username='$us'";
