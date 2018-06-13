@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<migrations>
+    <post>
+        <descriere>Migrare 1</descriere>
+        <dataplecare>2018-06-09</dataplecare>
+        <nr_copii>1312</nr_copii>
+        <nr_adulti>12123</nr_adulti>
+        <loc_destinatie>FRA</loc_destinatie>
+        <loc_plecare>ROU</loc_plecare>
+        <datapos>$06/13/2018 04:39:39</datapos>
+    </post>
+    <post>
+        <descriere>Migrare 2</descriere>
+        <dataplecare>2018-06-09</dataplecare>
+        <nr_copii>1312</nr_copii>
+        <nr_adulti>12123</nr_adulti>
+        <loc_destinatie>USA</loc_destinatie>
+        <loc_plecare>ROU</loc_plecare>
+        <datapos>$06/13/2018 04:39:39</datapos>
+    </post>
+    <post>
+        <descriere>Migrare 3</descriere>
+        <dataplecare>2018-06-09</dataplecare>
+        <nr_copii>1312</nr_copii>
+        <nr_adulti>12123</nr_adulti>
+        <loc_destinatie>CHN</loc_destinatie>
+        <loc_plecare>RUS</loc_plecare>
+        <datapos>$06/13/2018 04:39:39</datapos>
+    </post>
+</migrations>
