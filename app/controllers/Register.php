@@ -18,12 +18,14 @@ class Register extends Controller{
             //Check for empty fields
             if(empty($first)||empty($last) || empty($country) || empty($username) || empty($email)|| empty($pwd)){
                 header("Location: register?signup=empty");
+                $_SESSION['error']="Completeaza toate campurile!";
                 exit();
             }
             else{
                 // Check if imput characters are valid
                 if(!preg_match("/^[a-zA-Z]*$/",$first)|| !preg_match("/^[a-zA-Z]*$/",$last)|| !preg_match("/^[a-zA-Z]*$/",$country)){
-                    header("Location: register?signup=invalidimput");
+                    header("Location: register");
+                    $_SESSION['error']="Imput invalid!";
                     exit();
                 }
                 else{

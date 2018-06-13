@@ -16,8 +16,6 @@ class Login extends Controller{
             if($resultCheck < 1){
 
                 $_SESSION['Error']="Username sau parola gresita!";
-
-                $_SESSION['Error']="UsErnamE sau parola grEsita!";
                 $_SESSION['Time']=date("m/d/Y h:i:s a", time());
                 header("Location: login");
                 exit();

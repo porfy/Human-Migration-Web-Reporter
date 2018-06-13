@@ -30,6 +30,7 @@ Route::set("contact",function (){
 
 Route::set("user",function(){
     $controller = new User();
+    $controller ->info();
     $controller ->index();
 });
 

@@ -24,14 +24,18 @@ class Addevent extends Controller{
         $dat = $_POST['data_eveniment'];
         $des = $_POST['descriere'];
         $datapostare = date("m/d/Y h:i:s a", time());
-
+        if(empty($userid)||empty($plc)||empty($dest)||empty($adu)||empty($cop)||empty($mot)||empty($dat)||empty($des)){
+            header("Location: add-event");
+            $_SESSION['error']="Completeaza toate campurile!";
+            exit();
+        }
         $sql="insert into migration (user_id, loc_plecare,loc_destinatie, nr_adulti, nr_copii, motiv, dataplecare, descriere, data_postare)
               values('$userid', '$plc','$dest', '$adu', '$cop', '$mot', '$dat', '$des','$$datapostare')";
         mysqli_query($conn, $sql);
         $conn->close();
         header("Location: main");
-
-        twitter::posteaza();
+        $t=new twitter();
+        $t->posteaza();
     }
     }
 }

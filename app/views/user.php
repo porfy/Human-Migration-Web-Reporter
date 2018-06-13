@@ -1,3 +1,11 @@
+<?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+if(!isset($_SESSION['loged_in'])){
+    header('Location: login');
+}
+?>
 <!Doctype html>
 <html lang="en">
 <head>
@@ -31,10 +39,18 @@
 			<h2>About you</h2>
 			<a href="main.html"><img src="img/user.png" alt="user-icon" class="avatar"></a>
 			<ul>
-				<li>Full name: User Userel</li>
-				<li>Country: Romania</li>
-				<li>Email address: user@yahoo.com</li>
-				<li>Number of posts: 18</li>
+                <li>Full name:<?php
+                    echo $_SESSION['nume']." ".$_SESSION['prenume'];
+                    ?></li>
+                <li>Country: <?php
+                    echo $_SESSION['tara'];
+                    ?></li>
+                <li>Email address: <?php
+                    echo $_SESSION['email'];
+                    ?></li>
+                <li>Number of posts: <?php
+                    echo $_SESSION['nr_postari'];
+                    ?></li>
 			</ul>
 			<a href="main.html" id="back-button">Go back to the main page</a>
 			
