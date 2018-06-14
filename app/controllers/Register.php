@@ -36,8 +36,10 @@ class Register extends Controller{
                         exit();
                     }
                     else{
-                        $sql = "select * from users where username='$username'";
-                        $result = mysqli_query($conn,$sql);
+                        $sql =$conn->prepare( "select * from users where username='$username'");
+                        $sql->execute();
+                        $result=$sql->get_result();
+                        $sql->close();
                         $resultCheck=mysqli_num_rows($result);
                         if($resultCheck > 0){
                             $_SESSION['error']="Alege alt username!";
@@ -47,8 +49,10 @@ class Register extends Controller{
                         else{
                             //hashing the password
                             $hashedPwd=password_hash($pwd,PASSWORD_DEFAULT);
-                            $sql="insert into users (username,password,firstname,lastname,email,country) values('$username','$hashedPwd','$first','$last','$email','$country')";
-                            mysqli_query($conn,$sql);
+                            $sql=$conn->prepare("insert into users (username,password,firstname,lastname,email,country) values('$username','$hashedPwd','$first','$last','$email','$country')");
+                            $sql->execute();
+                            $result=$sql->get_result();
+                            $sql->close();
                             header("Location: main");
                             $conn->close();
                             exit();
