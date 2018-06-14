@@ -10,8 +10,10 @@ class Exportdataa extends Controller
     public function setChart(){
         require_once ('../app/models/Database.php');
         $conn=Database::getConection();
-        $sql="select sum(nr_adulti) as adulti,loc_plecare as plecare from migration group by loc_plecare";
-        $result=mysqli_query($conn,$sql);
+        $sql=$conn->prepare("select sum(nr_adulti) as adulti,loc_plecare as plecare from migration group by loc_plecare");
+        $sql->execute();
+        $result=$sql->get_result();
+        $sql->close();
         $nrTotal=0;
         $xml = new DOMDocument();
         while ($row=mysqli_fetch_assoc($result)){

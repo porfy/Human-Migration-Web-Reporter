@@ -1,5 +1,4 @@
 <?php
-// aici ai controllerul pentru Main
 
 class Main extends Controller
 {
@@ -16,8 +15,7 @@ class Main extends Controller
         $conn=Database::getConection();
         $sql="select * from migration order by data_postare desc";
         $result=mysqli_query($conn,$sql);
-        $xml->preserveWhiteSpace=False;
-        $migrations=$xml->createElement('migrations');
+        $migrations=$xml->createElement('migration');
         $xml->appendChild($migrations);
         while ($row = mysqli_fetch_assoc($result)){
             $post = $xml->createElement( 'post' );

@@ -10,8 +10,10 @@ class Addevent extends Controller{
         if(isset($_POST['submit'])){
         $us=$_SESSION['username'];
         $conn=Database::getConection();
-        $sql="select id from users  where username='$us'";
-        $result=mysqli_query($conn,$sql);
+        $sql=$conn->prepare("select id from users  where username='$us'");
+        $sql->execute();
+        $result=$sql->get_result();
+        $sql->close();
         $userid = mysqli_fetch_assoc($result);
         $userid = $userid["id"];
         $plc = $_POST['loc_plecare'];
