@@ -42,8 +42,8 @@
 
 			<button type="submit" name="submit"> Signup</button>
 
-			<a href="login.html"><em>Already have an account here?</em></a>
-			<a href="intro.html"><em>Go back</em></a>
+			<a href="login"><em>Already have an account here?</em></a>
+			<a href="intro"><em>Go back</em></a>
 		</div>
 	</form>
 </body>

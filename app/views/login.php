@@ -28,8 +28,7 @@
 				<p>Password</p>
 				<input type="password" name="password" placeholder="Enter password" required>
 				<button type="submit" name="submit">Login</button>
-				<a href="#"> Forget Password?</a>
-				<a href="intro.html">Go Back</a>
+				<a href="intro">Go Back</a>
 			</form>
 		</div>
 	</body>

@@ -49,6 +49,26 @@ class Exportdataa extends Controller
             $xml->save("../app/models/secondChart.xml");
         }
 
+        //third chart
+        $sql=$conn->prepare("select sum(nr_copii) as copii,dataplecare from migration group by dataplecare");
+        $sql->execute();
+        $result=$sql->get_result();
+        $sql->close();
+        $xml=new DOMDocument();
+        $root=$xml->createElement('root');
+        $xml->appendChild($root);
+        while ($row=mysqli_fetch_assoc($result)){
+            $info=$xml->createElement('info');
+            $nr_copii=$xml->createElement("nr_copii");
+            $nr_copii->nodeValue=$row['copii'];
+            $date=$xml->createElement('date');
+            $date->nodeValue=$row['dataplecare'];
+            $info->appendChild($nr_copii);
+            $info->appendChild($date);
+            $root->appendChild($info);
+            $xml->save("../app/models/thirdChart.xml");
+        }
+
     }
 }
 

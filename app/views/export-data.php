@@ -118,7 +118,6 @@ if(!isset($_SESSION['loged_in'])){
             var ctx="secondChart";
             var motive = Array();
             var nr_motive = Array();
-            var color=Array();
             color=[];
             motive = [];
             numbers = [];
@@ -175,6 +174,8 @@ if(!isset($_SESSION['loged_in'])){
         </script>
         <canvas id="third-chart" width="400" height="200"></canvas>
         <script>
+            var dat = Array();
+            var nr_copii = Array();
             var ctx="third-chart";
             function wait(ms){
                 var start = new Date().getTime();
@@ -187,15 +188,29 @@ if(!isset($_SESSION['loged_in'])){
             function getXML(url) {
                 return $.get(url)
             }
+            getXML("../app/models/thirdChart.xml").done(function(xml) {
+                var output = {};
+                $(xml).find('info').each(function () {
+                    var nodes = $(this).children();
+                    $.each(nodes, function (i, node) {
+                        var name = node.tagName;
+                        var value = node.textContent;
+                        output[name] = value;
+                    });
 
+                    dat.push(output['date']);
+                    nr_copii.push(output['nr_copii']);
+                });
+            });
+            dat.sort();
             wait(200);
-            char3=new Chart(document.getElementById(ctx), {
+            chart3=new Chart(document.getElementById(ctx), {
             type: 'line',
             data: {
-                labels: [1500, 1600, 1700, 1750, 1800, 1850, 1900, 1950, 1999, 2050],
+                labels: dat,
                 datasets: [
                     {
-                        data: [86, 114, 106, 106, 107, 111, 133, 221, 783, 2478],
+                        data: nr_copii,
                         label: "Children",
                         borderColor: "#3e95cd",
                         fill: false
@@ -208,7 +223,10 @@ if(!isset($_SESSION['loged_in'])){
                         text: 'Child migration '
                 }
             }
-            });
+            })
+            setInterval(function() {
+                chart3.update();
+            }, 1000);;
         </script>
     </div>
 </body>
