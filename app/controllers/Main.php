@@ -35,6 +35,18 @@ class Main extends Controller
             $descriere->nodeValue=$row['descriere'];
             $motiv=$xml->createElement('motiv');
             $motiv->nodeValue=$row['motiv'];
+            $latplec=$xml->createElement('lat_plec');
+            $latplec->nodeValue=$row['lat_plecare'];
+            $lngplec=$xml->createElement('lng_plec');
+            $lngplec->nodeValue=$row['lng_plecare'];
+            $latdest=$xml->createElement('lat_dest');
+            $latdest->nodeValue=$row['lat_destinatie'];
+            $lngdest=$xml->createElement('lng_dest');
+            $lngdest->nodeValue=$row['lng_destinatie'];
+            $post->appendChild($latplec);
+            $post->appendChild($lngplec);
+            $post->appendChild($latdest);
+            $post->appendChild($lngdest);
             $post->appendChild($motiv);
             $post->appendChild($descriere);
             $post->appendChild($dataev);

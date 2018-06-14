@@ -32,8 +32,8 @@ if(!isset($_SESSION['loged_in'])){
 <body class="body">
 
 <div class="top-nav">
-    <img src="img/search.png" alt="search-icon" class="search-icon">
-    <input type="text" placeholder="Search..">
+    <!--<img src="img/search.png" alt="search-icon" class="search-icon">
+<input type="text" placeholder="Search..">-->
 </div>
 
 <div class="side-nav">
@@ -86,6 +86,11 @@ if(!isset($_SESSION['loged_in'])){
                     geocodeService.reverse().latlng(destinatie).run(function(error, result) {
                         document.getElementById("destinatie").value = result.address.CountryCode;
                     })
+
+                    document.getElementById("latitudine_plecare").value = L.marker(plecare).getLatLng().lat;
+                    document.getElementById("longitudine_plecare").value = L.marker(plecare).getLatLng().lng;
+                    document.getElementById("latitudine_destinatie").value = L.marker(destinatie).getLatLng().lat;
+                    document.getElementById("longitudine_destinatie").value = L.marker(destinatie).getLatLng().lng;
                 });
 
                 //GEOCODE BY COUNTRYCODE TEXT
@@ -93,6 +98,7 @@ if(!isset($_SESSION['loged_in'])){
                 var locc1 = 'FRA';
                 var locc2 = 'ROU';
                 var locc1_marker, locc2_marker;
+
 
                 var test = L.esri.Geocoding.geocode().text(locc1).run(function(err, rezultat, response){
                     locc1_marker = L.marker(rezultat.results[0].latlng);
@@ -126,6 +132,14 @@ if(!isset($_SESSION['loged_in'])){
                         this._div.innerHTML = '<div class="formular">\n' +
                             '            <form action="event_submit" method="post">\n' +
                             '                <ul>\n' +
+                            '                    <li >Latitudine plecare: </li>\n' +
+                            '                    <li><input type="text" id="latitudine_plecare" name="lat_plec" readonly></li>\n' +
+                            '                    <li >Longitudine plecare: </li>\n' +
+                            '                    <li><input type="text" id="longitudine_plecare" name="lng_plec" readonly></li>\n' +
+                            '                    <li >Latitudine destinatie: </li>\n' +
+                            '                    <li><input type="text" id="latitudine_destinatie" name="lat_dest" readonly></li>\n' +
+                            '                    <li >Longitudine destinatie: </li>\n' +
+                            '                    <li><input type="text" id="longitudine_destinatie" name="lng_dest" readonly></li>\n' +
                             '                    <li >Loc plecare: </li>\n' +
                             '                    <li><input type="text" id="plecare" name="loc_plecare" readonly></li>\n' +
                             '                    <li>Loc destinatie: </li>\n' +
@@ -144,6 +158,7 @@ if(!isset($_SESSION['loged_in'])){
                             '                    <li><input type="date" name="data_eveniment"></li>\n' +
                             '                    <li>Descriere:</li>\n' +
                             '                    <li><input type="text" name="descriere" autocomplete="off"></li>\n' +
+                            '                    <li><input type="checkbox" name="share" value="true"> Also share on Twitter</li>\n' +
                             '                    <button type="submit" name="submit">Add Event</button>\n' +
                             '                </ul>\n' +
                             '            </form>\n' +

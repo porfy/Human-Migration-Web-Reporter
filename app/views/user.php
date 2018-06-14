@@ -18,8 +18,8 @@ if(!isset($_SESSION['loged_in'])){
 <body class="body">
 
 	<div class="top-nav">
-		<img src="img/search.png" alt="search-icon" class="search-icon">
-		<input type="text" placeholder="Search..">
+        <!--<img src="img/search.png" alt="search-icon" class="search-icon">
+<input type="text" placeholder="Search..">-->
 	</div>
 
     <div class="side-nav">

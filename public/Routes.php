@@ -62,4 +62,3 @@ Route::set("event_submit",function(){
     $controller = new Addevent();
     $controller ->add();
 });
-    
