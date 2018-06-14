@@ -15,6 +15,8 @@
     <link rel="stylesheet" type="text/css" href="main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+
 
     <script type="text/javascript" src="../app/models/chart/Chart.js"></script>
 
@@ -37,6 +39,7 @@
 </div>
 
 <div class="main-content">
+
     <canvas id="firstChart" width="400" height="200"></canvas>
     <script>
         var ctx = "firstChart";
@@ -114,10 +117,11 @@
             firstChart.update();
         }, 1000);
     </script>
-    <form>
-        <button type="submit" name="download1_xml" >Save as XML</button>
-        <button type="submit" name="download1_pdf">Save as PDF</button>
-    </form>
+    <div class="buttons">
+        <button type="button" onclick='download("#firstChart")' name="app1">Download as PDF</button>
+        <button type="button" onclick='getxml("../app/models/firstChart.xml", "firstChart")' name="app2">Download XMl</button>
+    </div>
+
     <canvas id="secondChart" width="400" height="200"></canvas>
     <script>
         var ctx = "secondChart";
@@ -178,10 +182,10 @@
             chart2.update();
         }, 1000);
     </script>
-    <form>
-        <button type="submit" name="download2_xml">Save as XML</button>
-        <button type="submit" name="download2_pdf">Save as PDF</button>
-    </form>
+    <div class="buttons">
+        <button type="button" onclick='download("#secondChart")' name="app1">Download as PDF</button>
+        <button type="button" onclick='getxml("../app/models/secondChart.xml", "secondChart")' name="app2">Download XMl</button>
+    </div>
 
     <canvas id="third-chart" width="400" height="200"></canvas>
     <script>
@@ -242,10 +246,65 @@
         }, 1000);
         ;
     </script>
-    <form>
-        <button type="submit" name="download3_xml">Save as XML</button>
-        <button type="submit" name="download3_pdf">Save as PDF</button>
-    </form>
+    <div class="buttons">
+        <button type="button" onclick='download("#third-chart")' name="app1">Download as PDF</button>
+        <button type="button" onclick='getxml("../app/models/thirdChart.xml", "thirdChart")' name="app3">Download XMl</button>
+    </div>
+
+    <script>
+        function download(parameter) {
+            // get size of report page
+            //var reportPageHeight = document.getElementById(parameter).innerHeight();
+            //var reportPageHeight = document.getElementById(parameter).innerWidth();
+            var reportPageHeight = $(parameter).innerHeight();
+            var reportPageWidth = $(parameter).innerWidth();
+
+            // create a new canvas object that we will populate with all other canvas objects
+            var pdfCanvas = $('<canvas />').attr({
+                id: "canvaspdf",
+                width: reportPageWidth,
+                height: reportPageHeight
+            });
+
+            // keep track canvas position
+            var pdfctx = $(pdfCanvas)[0].getContext('2d');
+            var pdfctxX = 0;
+            var pdfctxY = 0;
+            var buffer = 100;
+
+            // for each chart.js chart
+            $("canvas").each(function(index) {
+                // get the chart height/width
+                var canvasHeight = $(parameter).innerHeight();
+                var canvasWidth = $(parameter).innerWidth();
+
+                // draw the chart into the new canvas
+                pdfctx.drawImage($(parameter)[0], pdfctxX, pdfctxY, canvasWidth, canvasHeight);
+                pdfctxX += canvasWidth + buffer;
+
+                // our report page is in a grid pattern so replicate that in the new canvas
+                if (1===1) {
+                    pdfctxX = 0;
+                    pdfctxY += canvasHeight + buffer;
+                }
+            });
+
+            // create new pdf and add our new canvas as an image
+            var pdf = new jsPDF('l', 'pt', [reportPageWidth, reportPageHeight]);
+            pdf.addImage($(pdfCanvas)[0], 'PNG', 0, 0);
+
+            // download the pdf
+            pdf.save('filename.pdf');
+        };
+    </script>
+    <script>
+        function getxml(parameter, name) {
+            var link = document.createElement("a");
+            link.download = name;
+            link.href = parameter;
+            link.click();
+        }
+    </script>
 </div>
 </body>
 </html>

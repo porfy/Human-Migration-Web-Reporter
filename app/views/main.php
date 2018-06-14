@@ -108,7 +108,7 @@
                             });
 
                             //exemplu 012.666666 + 0.000101 si 0.000999
-                            var random = (Math.floor(Math.random() * 999) + 500)/10000;
+                            var random = (Math.floor(Math.random() * 999) + 500) / 10000;
 
 
                             var descriere = output['descriere'];
@@ -144,8 +144,7 @@
                                 opacity: 0.9,
                                 smoothFactor: 1
                             });
-                            polyline.bindPopup("Descriere: " + descriere + "</br>Numar copii: " + nr_copii + "</br>Numar adulti: " + nr_adulti + "</br>Data migrare: " + dataplecare + "</br>Motiv: " + motiv
-                                                + "</br><button>Remove Line</button>");
+                            polyline.bindPopup("Descriere: " + descriere + "</br>Numar copii: " + nr_copii + "</br>Numar adulti: " + nr_adulti + "</br>Data migrare: " + dataplecare + "</br>Motiv: " + motiv);
                             polyline.addTo(map);
 
                             /*geoPlecare = L.esri.Geocoding.geocode().text(output['loc_plecare']).run(function(err, rezultat, response){

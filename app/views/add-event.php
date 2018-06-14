@@ -65,8 +65,8 @@ if(!isset($_SESSION['loged_in'])){
                 var map = new L.map('map_event').setView([0, 0], 2);
                 var geocodeService = L.esri.Geocoding.geocodeService();
                 var tiles = L.esri.basemapLayer("Gray").addTo(map);
-                var searchControlPlecare = L.esri.Geocoding.geosearch({expanded:true, placeholder:'migration origin', position: 'topright'}).addTo(map);
-                var searchControlDestinatie = L.esri.Geocoding.geosearch({expanded:true, placeholder:'migration destination', position: 'topright'}).addTo(map);
+                var searchControlPlecare = L.esri.Geocoding.geosearch({expanded:true, placeholder:'Search migration departure', position: 'topright'}).addTo(map);
+                var searchControlDestinatie = L.esri.Geocoding.geosearch({expanded:true, placeholder:'Search migration destination', position: 'topright'}).addTo(map);
                 var results = L.layerGroup().addTo(map);
 
                 searchControlPlecare.on("results", function(data) {
@@ -99,24 +99,6 @@ if(!isset($_SESSION['loged_in'])){
                 var locc2 = 'ROU';
                 var locc1_marker, locc2_marker;
 
-
-                var test = L.esri.Geocoding.geocode().text(locc1).run(function(err, rezultat, response){
-                    locc1_marker = L.marker(rezultat.results[0].latlng);
-                    results.addLayer(locc1_marker);
-                    latlngs.push(locc1_marker.getLatLng());
-                });
-
-                var test2 = L.esri.Geocoding.geocode().text(locc2).run(function(err, rezultat, response){
-                    locc2_marker = L.marker(rezultat.results[0].latlng);
-                    results.addLayer(locc2_marker);
-                    latlngs.push(locc2_marker.getLatLng());
-                    var polyline = L.polyline(latlngs, {color: 'blue', weight:3, opacity:0.5, smoothFactor: 1});
-                    polyline.addTo(map);
-                });
-
-
-
-
                 //add instructions
                 var addInstructions = function(map) {
                     var info = L.control({position: 'topright'});
@@ -132,33 +114,33 @@ if(!isset($_SESSION['loged_in'])){
                         this._div.innerHTML = '<div class="formular">\n' +
                             '            <form action="event_submit" method="post">\n' +
                             '                <ul>\n' +
-                            '                    <li >Latitudine plecare: </li>\n' +
+                            '                    <li >Departure latitude: </li>\n' +
                             '                    <li><input type="text" id="latitudine_plecare" name="lat_plec" readonly></li>\n' +
-                            '                    <li >Longitudine plecare: </li>\n' +
+                            '                    <li >Departure longitude: </li>\n' +
                             '                    <li><input type="text" id="longitudine_plecare" name="lng_plec" readonly></li>\n' +
-                            '                    <li >Latitudine destinatie: </li>\n' +
+                            '                    <li >Destination latitude: </li>\n' +
                             '                    <li><input type="text" id="latitudine_destinatie" name="lat_dest" readonly></li>\n' +
-                            '                    <li >Longitudine destinatie: </li>\n' +
+                            '                    <li >Destination longitude: </li>\n' +
                             '                    <li><input type="text" id="longitudine_destinatie" name="lng_dest" readonly></li>\n' +
-                            '                    <li >Loc plecare: </li>\n' +
+                            '                    <li >Departure location: </li>\n' +
                             '                    <li><input type="text" id="plecare" name="loc_plecare" readonly></li>\n' +
-                            '                    <li>Loc destinatie: </li>\n' +
+                            '                    <li>Destination location: </li>\n' +
                             '                    <li><input type="text" id="destinatie" name="loc_destinatie" readonly></li>\n' +
-                            '                    <li>Nr. adulti: </li>\n' +
+                            '                    <li>Number of adults: </li>\n' +
                             '                    <li><input type="text" name="nr_adulti" autocomplete="off"></li>\n' +
-                            '                    <li>Nr. copii: </li>\n' +
+                            '                    <li>Number of kids: </li>\n' +
                             '                    <li><input type="text" name="nr_copii" autocomplete="off"></li>\n' +
-                            '                    <li>Motiv: <select name="motiv">' +
+                            '                    <li>Reason: <select name="motiv">' +
                             '                           <option value="economic">economic</option>' +
-                            '                           <option value="razboi">razboi</option>' +
-                            '                           <option value="dezastre naturale">dezastre naturale</option>' +
-                            '                           <option value="altul">altul</option>' +
+                            '                           <option value="war">razboi</option>' +
+                            '                           <option value="natural disasters">dezastre naturale</option>' +
+                            '                           <option value="other">altul</option>' +
                             '                           <option value="social politic">social-politic</option></select></li>\n' +
                             '                    <li>Data eveniment: </li>\n' +
                             '                    <li><input type="date" name="data_eveniment"></li>\n' +
                             '                    <li>Descriere:</li>\n' +
                             '                    <li><input type="text" name="descriere" autocomplete="off"></li>\n' +
-                            '                    <li><input type="checkbox" name="share" value="true"> Also share on Twitter</li>\n' +
+                            '                    Also share on Twitter<input type="checkbox" name="share" value="true">\n' +
                             '                    <button type="submit" name="submit">Add Event</button>\n' +
                             '                </ul>\n' +
                             '            </form>\n' +

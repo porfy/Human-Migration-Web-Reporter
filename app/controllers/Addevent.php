@@ -44,7 +44,7 @@ class Addevent extends Controller{
         if(isset($_POST['share'])){
             require_once ('../app/models/twitter-app.php');
             $t=new twitter();
-            $t->posteaza($us."a raportat un eveniment migratoriu din ".$plc." spre ".$dest." a ".$adu."de adulti si ".$cop." de copii.");
+            $t->posteaza("Utilizatorul nostru ".$us." a raportat un eveniment migratoriu din ".$plc." spre ".$dest." a ".$adu." de adulti si ".$cop." de copii. Motivul migrarii a fost declarat ca fiind ".$mot.". Evenimentul a fost descris ca ".$des." #HmRt2018");
         }
 
     }
