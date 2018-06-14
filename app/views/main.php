@@ -59,15 +59,42 @@
                             var geocodeService = L.esri.Geocoding.geocodeService();
                             var tiles = L.esri.basemapLayer("Gray").addTo(map);
                             var results = L.layerGroup().addTo(map);
+                            var geoPlecare, geoDestinatie;
 
-                            var latlngs = Array();
 
                             function getXML(url) {
                                 return $.get(url)
                             }
 
+                            function getRandomColor() {
+                                var letters = '0123456789ABCDEF';
+                                var color = '#';
+                                for (var i = 0; i < 6; i++) {
+                                    color += letters[Math.floor(Math.random() * 16)];
+                                }
+                                return color;
+                            }
+
+                            var icons = {
+                                departure: L.icon({
+                                    iconUrl: '../public/img/departure_icon.svg',
+                                    iconSize: [27, 31],
+                                    iconAnchor: [13.5, 17.5],
+                                    popupAnchor: [0, -11],
+                                }),
+                                destination: L.icon({
+                                    iconUrl: '../public/img/destination_icon.svg',
+                                    iconSize: [27, 31],
+                                    iconAnchor: [13.5, 13.5],
+                                    popupAnchor: [0, -11],
+                                }),
+                            };
+
                             getXML('../app/models/migration.xml').done(function(xml){
-                                var output = {}; // restructure the xml as an object
+                                var latlngs = Array();
+                                latlngs = [];
+                                results.clearLayers();
+                                var output = {};
                                 $(xml).find('post').each(function() {
                                     var nodes = $(this).children();
                                     $.each(nodes, function(i,node){
@@ -75,24 +102,26 @@
                                         var value = node.textContent;
                                         output[name] = value;
                                     });
-                                    // build markers from the output and add to the map
-                                    var geoPlecare = L.esri.Geocoding.geocode().text(output['loc_plecare']).run(function(err, rezultat, response){
-                                        markerPlecare = L.marker(rezultat.results[0].latlng);
-                                        var popupContent = output['descriere']; //probleme aici apare doar descrierea la ultima migrare
+
+                                    geoPlecare = L.esri.Geocoding.geocode().text(output['loc_plecare']).run(function(err, rezultat, response){
+                                        markerPlecare = L.marker(rezultat.results[0].latlng,{icon: icons['departure']});
+                                        popupContent = output['nr_copii']; //probleme aici apare doar descrierea la ultima migrare
                                         markerPlecare.bindPopup(popupContent)
                                         results.addLayer(markerPlecare);
                                         latlngs.push(markerPlecare.getLatLng());
                                     });
 
-                                    var geoDestinatie = L.esri.Geocoding.geocode().text(output['loc_destinatie']).run(function(err, rezultat, response){
-                                        markerDestinatie = L.marker(rezultat.results[0].latlng);
-                                        var popupContent = output['descriere']; //probleme aici apare doar descrierea la ultima migrare
+                                    geoDestinatie = L.esri.Geocoding.geocode().text(output['loc_destinatie']).run(function(err, rezultat, response){
+                                        markerDestinatie = L.marker(rezultat.results[0].latlng, {icon: icons['destination']});
+                                        popupContent = output['nr_copii']; //probleme aici apare doar descrierea la ultima migrare
                                         markerDestinatie.bindPopup(popupContent)
                                         results.addLayer(markerDestinatie);
                                         latlngs.push(markerDestinatie.getLatLng());
 
-                                        polyline = L.polyline(latlngs, {color: 'blue', weight:3, opacity:0.5, smoothFactor: 1});
+                                        polyline = L.polyline(latlngs, {color: getRandomColor(), weight:3, opacity:0.9, smoothFactor: 1});
+                                        polyline.bindPopup(output['descriere']);
                                         polyline.addTo(map);
+
                                         latlngs = []; //clear
                                     });
 
@@ -100,9 +129,9 @@
                                 });
                             })
 
-
 						</script>
-					</div>
+
+                    </div>
 					<ul>
 						<li>Migration from Romania</li>
 						<li>12 March 2018</li>
@@ -116,19 +145,6 @@
 			</article>
 		</div>
 	</div>
-
-<!--<script>
-function myMap() {
-    var mapOptions = {
-        center: new google.maps.LatLng(51.5, -0.12),
-        zoom: 10,
-        mapTypeId: google.maps.MapTypeId.HYBRID
-    }
-var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-}
-</script>
-
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfKb6AcjpjTTPhzjAmMaCB5vX59WBWdls&callback=myMap"></script>-->
 
 </body>
 </html>
