@@ -10,7 +10,7 @@ if(!isset($_SESSION['loged_in'])){
 <html lang="en">
 <head>
 	<title>Human Migration Report Tool</title>
-	<meta charset="utf-8"/>e
+	<meta charset="utf-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" type="text/css" href="main.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -20,7 +20,6 @@ if(!isset($_SESSION['loged_in'])){
 
 </head>
 <body class="body">
-
 	<div class="top-nav">
 		<img src="img/search.png" alt="search-icon" class="search-icon">
 		<input type="text" placeholder="Search..">
@@ -38,14 +37,13 @@ if(!isset($_SESSION['loged_in'])){
     </div>
 
 	<div class="main-content">
-        <canvas id="myChart" width="400" height="200"></canvas>
+        <canvas id="firstChart" width="400" height="200"></canvas>
         <script>
-            var ctx = "myChart";
-
+            var ctx = "firstChart";
             var countries = Array();
-            var numbers = Array();
+            var num= Array();
             countries = [];
-            numbers = [];
+            num = [];
 
             function wait(ms){
                 var start = new Date().getTime();
@@ -58,7 +56,6 @@ if(!isset($_SESSION['loged_in'])){
             function getXML(url) {
                 return $.get(url)
             }
-
             wait(200);
             getXML('../app/models/firstChart.xml').done(function(xml) {
                 var output = {};
@@ -71,17 +68,17 @@ if(!isset($_SESSION['loged_in'])){
                     });
 
                     countries.push(output['data']);
-                    numbers.push(output['number']);
+                    num.push(output['number']);
                 });
             })
 
-            var myChart = new Chart(ctx, {
+            var firstChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
                     labels: countries,
                     datasets: [{
                         label: 'Number of people',
-                        data: numbers,
+                        data: num,
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',
                             'rgba(54, 162, 235, 0.2)',
@@ -112,16 +109,107 @@ if(!isset($_SESSION['loged_in'])){
                 }
             });
 
+            setInterval(function() {
+                    firstChart.update();
+                }, 1000);
+        </script>
+        <canvas id="secondChart" width="400" height="200"></canvas>
+        <script>
+            var ctx="secondChart";
+            var motive = Array();
+            var nr_motive = Array();
+            var color=Array();
+            color=[];
+            motive = [];
+            numbers = [];
+            function wait(ms){
+                var start = new Date().getTime();
+                var end = start;
+                while(end < start + ms) {
+                    end = new Date().getTime();
+                }
+            }
 
+            function getXML(url) {
+                return $.get(url)
+            }
+
+            wait(200);
+            getXML("../app/models/secondChart.xml").done(function(xml) {
+                var output = {};
+                $(xml).find('info').each(function () {
+                    var nodes = $(this).children();
+                    $.each(nodes, function (i, node) {
+                        var name = node.tagName;
+                        var value = node.textContent;
+                        output[name] = value;
+                    });
+
+                    motive.push(output['motiv']);
+                    nr_motive.push(output['number']);
+                });
+            });
+            chart2=new Chart(document.getElementById(ctx), {
+            type: 'doughnut',
+                data: {
+                labels: motive,
+                    datasets: [
+                    {
+                        label: motive,
+                        backgroundColor:["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+                        data: nr_motive
+                    }
+                ]
+            },
+            options: {
+                title: {
+                    display: true,
+                        text: 'Nr. Migrari dupa motiv'
+                }
+            }
+            });
 
             setInterval(function() {
-                    myChart.update();
-                }, 1000);
-
-
-
+                chart2.update();
+            }, 1000);
         </script>
-	</div>
+        <canvas id="third-chart" width="400" height="200"></canvas>
+        <script>
+            var ctx="third-chart";
+            function wait(ms){
+                var start = new Date().getTime();
+                var end = start;
+                while(end < start + ms) {
+                    end = new Date().getTime();
+                }
+            }
 
+            function getXML(url) {
+                return $.get(url)
+            }
+
+            wait(200);
+            char3=new Chart(document.getElementById(ctx), {
+            type: 'line',
+            data: {
+                labels: [1500, 1600, 1700, 1750, 1800, 1850, 1900, 1950, 1999, 2050],
+                datasets: [
+                    {
+                        data: [86, 114, 106, 106, 107, 111, 133, 221, 783, 2478],
+                        label: "Children",
+                        borderColor: "#3e95cd",
+                        fill: false
+                    }
+                    ]
+                 },
+                options: {
+                title: {
+                    display: true,
+                        text: 'Child migration '
+                }
+            }
+            });
+        </script>
+    </div>
 </body>
 </html>

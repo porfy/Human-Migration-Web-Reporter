@@ -5,6 +5,7 @@ body {
     font-family: 'Source Sans Pro';
     line-height: 1.5;
     text-align: left;
+    overflow: scroll;
 }
 .error{
     color:red;
@@ -92,7 +93,9 @@ body {
     margin-top: 4px;
     color: #fff;
 }
-
+#myChart{
+    margin-bottom: 20px;
+}
 #logo-icon {
     width: 100%;
     padding: 10px;
