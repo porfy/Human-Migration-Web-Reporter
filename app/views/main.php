@@ -29,9 +29,6 @@
 <body class="body">
 
 	<div class="top-nav">
-        <?php
-         echo $_SESSION['loged_in'];
-        ?>
         <img src="img/search.png" alt="search-icon" class="search-icon">
 		<input type="text" placeholder="Search..">
 	</div>
@@ -69,7 +66,7 @@
                                 return $.get(url)
                             }
 
-                            getXML('../app/models/migration2.xml').done(function(xml){
+                            getXML('../app/models/migration.xml').done(function(xml){
                                 var output = {}; // restructure the xml as an object
                                 $(xml).find('post').each(function() {
                                     var nodes = $(this).children();

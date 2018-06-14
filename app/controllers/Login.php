@@ -10,8 +10,11 @@ class Login extends Controller{
             $conn=Database::getConection();
             $username=mysqli_real_escape_string($conn,$_POST['username']);
             $password=mysqli_real_escape_string($conn,$_POST['password']);
-            $sql="Select * from users where username='$username'";
-            $result=mysqli_query($conn,$sql);
+            $sql=$conn->prepare("Select * from users where username=(?)");
+            $sql->bind_param('s',$username);
+            $sql->execute();
+            $result=$sql->get_result();
+            $sql->close();
             $resultCheck= mysqli_num_rows($result);
             if($resultCheck < 1){
 
@@ -25,7 +28,7 @@ class Login extends Controller{
                     //de-hashing the password
                     $hashedPwdCheck= password_verify($password,$row['password']);
                     if($hashedPwdCheck==false){
-                        $_SESSION['Error']="UsErnamE sau parola grEsita!";
+                        $_SESSION['Error']="Username sau parola gresita!";
                         header("Location: login");
                         exit();
                     }

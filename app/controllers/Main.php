@@ -17,6 +17,8 @@ class Main extends Controller
         $sql="select * from migration order by data_postare desc";
         $result=mysqli_query($conn,$sql);
         $xml->preserveWhiteSpace=False;
+        $migrations=$xml->createElement('migrations');
+        $xml->appendChild($migrations);
         while ($row = mysqli_fetch_assoc($result)){
             $post = $xml->createElement( 'post' );
             $datapostare= $xml->createElement("datapos");
@@ -40,8 +42,9 @@ class Main extends Controller
             $post->appendChild($dest);
             $post->appendChild($plecare);
             $post->appendChild($datapostare);
-            $xml->appendChild( $post );
+            $migrations->appendChild( $post );
             $xml->save('../app/models/migration.xml');
+
         }
 
 
