@@ -1,3 +1,2 @@
 <?xml version="1.0"?>
-<info><number>30000</number><data>ITA</data></info>
-<info><number>57403</number><data>ROU</data></info>
+<root><info><number>30000</number><data>ITA</data></info><info><number>57403</number><data>ROU</data></info></root>

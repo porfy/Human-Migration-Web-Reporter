@@ -16,6 +16,8 @@ class Exportdataa extends Controller
         $sql->close();
         $nrTotal=0;
         $xml = new DOMDocument();
+        $root=$xml->createElement('root');
+        $xml->appendChild($root);
         while ($row=mysqli_fetch_assoc($result)){
             $info=$xml->createElement('info');
             $data=$xml->createElement('data');
@@ -24,7 +26,7 @@ class Exportdataa extends Controller
             $number->nodeValue=$row['adulti'];
             $info->appendChild($number);
             $info->appendChild($data);
-            $xml->appendChild($info);
+            $root->appendChild($info);
             $xml->save('../app/models/firstChart.xml');
         }
 

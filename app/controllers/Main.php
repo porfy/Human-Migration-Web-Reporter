@@ -33,6 +33,9 @@ class Main extends Controller
             $dataev->nodeValue=$row['dataplecare'];
             $descriere=$xml->createElement('descriere');
             $descriere->nodeValue=$row['descriere'];
+            $motiv=$xml->createElement('motiv');
+            $motiv->nodeValue=$row['motiv'];
+            $post->appendChild($motiv);
             $post->appendChild($descriere);
             $post->appendChild($dataev);
             $post->appendChild($nr_copii);
