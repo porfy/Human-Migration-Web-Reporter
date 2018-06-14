@@ -120,9 +120,9 @@
                                         //markerPlecare.bindPopup(popupContent)
                                         results.addLayer(markerPlecare);
                                         latlngs.push(markerPlecare.getLatLng());
+                                        wait(100);
                                     });
 
-                                    //wait(200);
 
                                     geoDestinatie = L.esri.Geocoding.geocode().text(output['loc_destinatie']).run(function(err, rezultat, response){
                                         markerDestinatie = L.marker(rezultat.results[0].latlng, {icon: icons['destination']});
@@ -132,15 +132,15 @@
                                         latlngs.push(markerDestinatie.getLatLng());
 
                                         polyline = L.polyline(latlngs, {color: getRandomColor(), weight:6, opacity:0.9, smoothFactor: 1});
-                                        polyline.bindPopup("Descriere: " + descriere + "\nNumar copii: " + nr_copii +"\nNumar adulti: " + nr_adulti +"\nData migrare: "+ dataplecare + "\nMotiv: " + motiv);
+                                        polyline.bindPopup("Descriere: " + descriere + "</br>Numar copii: " + nr_copii +"</br>Numar adulti: " + nr_adulti +"</br>Data migrare: "+ dataplecare + "</br>Motiv: " + motiv);
                                         polyline.addTo(map);
 
                                         latlngs = []; //clear
-                                    });
+                                    })
 
 
                                 });
-                            })
+                            });
 
 						</script>
 

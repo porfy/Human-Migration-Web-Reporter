@@ -126,14 +126,14 @@ if(!isset($_SESSION['loged_in'])){
                         this._div.innerHTML = '<div class="formular">\n' +
                             '            <form action="event_submit" method="post">\n' +
                             '                <ul>\n' +
-                            '                    <li>Loc plecare: </li>\n' +
-                            '                    <li><input type="text" id="plecare" name="loc_plecare"></li>\n' +
+                            '                    <li >Loc plecare: </li>\n' +
+                            '                    <li><input type="text" id="plecare" name="loc_plecare" readonly></li>\n' +
                             '                    <li>Loc destinatie: </li>\n' +
-                            '                    <li><input type="text" id="destinatie" name="loc_destinatie"></li>\n' +
+                            '                    <li><input type="text" id="destinatie" name="loc_destinatie" readonly></li>\n' +
                             '                    <li>Nr. adulti: </li>\n' +
-                            '                    <li><input type="text" name="nr_adulti"></li>\n' +
+                            '                    <li><input type="text" name="nr_adulti" autocomplete="off"></li>\n' +
                             '                    <li>Nr. copii: </li>\n' +
-                            '                    <li><input type="text" name="nr_copii"></li>\n' +
+                            '                    <li><input type="text" name="nr_copii" autocomplete="off"></li>\n' +
                             '                    <li>Motiv: <select name="motiv">' +
                             '                           <option value="economic">economic</option>' +
                             '                           <option value="razboi">razboi</option>' +
@@ -143,7 +143,7 @@ if(!isset($_SESSION['loged_in'])){
                             '                    <li>Data eveniment: </li>\n' +
                             '                    <li><input type="date" name="data_eveniment"></li>\n' +
                             '                    <li>Descriere:</li>\n' +
-                            '                    <li><input type="text" name="descriere"></li>\n' +
+                            '                    <li><input type="text" name="descriere" autocomplete="off"></li>\n' +
                             '                    <button type="submit" name="submit">Add Event</button>\n' +
                             '                </ul>\n' +
                             '            </form>\n' +

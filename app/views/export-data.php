@@ -11,9 +11,10 @@ if(!isset($_SESSION['loged_in'])){
 <head>
 	<title>Human Migration Report Tool</title>
 	<meta charset="utf-8"/>e
-	<meta name="viewport" content="width=devic-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" type="text/css" href="main.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
 
     <script type="text/javascript" src="../app/models/chart/Chart.js"></script>
 
@@ -41,13 +42,46 @@ if(!isset($_SESSION['loged_in'])){
         <script>
             var ctx = "myChart";
 
+            var countries = Array();
+            var numbers = Array();
+            countries = [];
+            numbers = [];
+
+            function wait(ms){
+                var start = new Date().getTime();
+                var end = start;
+                while(end < start + ms) {
+                    end = new Date().getTime();
+                }
+            }
+
+            function getXML(url) {
+                return $.get(url)
+            }
+
+            wait(200);
+            getXML('../app/models/firstChart.xml').done(function(xml) {
+                var output = {};
+                $(xml).find('info').each(function () {
+                    var nodes = $(this).children();
+                    $.each(nodes, function (i, node) {
+                        var name = node.tagName;
+                        var value = node.textContent;
+                        output[name] = value;
+                    });
+
+                    countries.push(output['data']);
+                    numbers.push(output['number']);
+                });
+            })
+
             var myChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                    labels: countries,
                     datasets: [{
                         label: 'Number of people',
-                        data: [200000, 19, 3, 5, 2, 3],
+                        data: numbers,
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',
                             'rgba(54, 162, 235, 0.2)',
@@ -77,6 +111,15 @@ if(!isset($_SESSION['loged_in'])){
                     }
                 }
             });
+
+
+
+            setInterval(function() {
+                    myChart.update();
+                }, 1000);
+
+
+
         </script>
 	</div>
 

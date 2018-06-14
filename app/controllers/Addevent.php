@@ -34,8 +34,10 @@ class Addevent extends Controller{
         mysqli_query($conn, $sql);
         $conn->close();
         header("Location: main");
+
+        require_once ('../app/models/twitter-app.php');
         $t=new twitter();
-        $t->posteaza();
+        $t->posteaza($us."a raportat un eveniment migratoriu din ".$plc." spre ".$dest." a ".$adu."de adulti si ".$cop." de copii.");
     }
     }
 }

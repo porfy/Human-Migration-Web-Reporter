@@ -64,7 +64,6 @@ body {
 }
 
 .main-content {
-    overflow: hidden;
     margin-left: 20%;
     margin-top: 25px;
     padding: 30px;
@@ -73,6 +72,7 @@ body {
 
 .content {
     width: 100%;
+    overflow: hidden;
 }
 
 .map-photo {
