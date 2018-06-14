@@ -46,21 +46,24 @@
 
 	<div class="main-content">
 		<div class="content">
-			<h1>MIGRATION OVERVIEW</h1>
+			<h1>ALL MIGRATION OVERVIEW</h1>
 			<article class="topcontent">
-				<header>
-					<h2><a href="#" title="First post">Migration 1</a></h2>
-					<h3 class="align-right">posted by @anonymous</h3>
-				</header>
-					<div id="mapid" style="width:1000px; height: 600px;">
+					<div id="map_event">
 						<script>
 
-                            var map = new L.map('mapid').setView([0, 0], 2);
+                            var map = new L.map('map_event').setView([0, 0], 2);
                             var geocodeService = L.esri.Geocoding.geocodeService();
-                            var tiles = L.esri.basemapLayer("Gray").addTo(map);
+                            var tiles = L.esri.basemapLayer("Streets").addTo(map);
                             var results = L.layerGroup().addTo(map);
                             var geoPlecare, geoDestinatie;
 
+                            function wait(ms){
+                                var start = new Date().getTime();
+                                var end = start;
+                                while(end < start + ms) {
+                                    end = new Date().getTime();
+                                }
+                            }
 
                             function getXML(url) {
                                 return $.get(url)
@@ -90,10 +93,12 @@
                                 }),
                             };
 
+                            wait(200);
                             getXML('../app/models/migration.xml').done(function(xml){
                                 var latlngs = Array();
                                 latlngs = [];
                                 results.clearLayers();
+
                                 var output = {};
                                 $(xml).find('post').each(function() {
                                     var nodes = $(this).children();
@@ -103,23 +108,31 @@
                                         output[name] = value;
                                     });
 
+                                    var descriere = output['descriere'];
+                                    var nr_copii = output['nr_copii'];
+                                    var nr_adulti = output['nr_adulti'];
+                                    var dataplecare = output['dataplecare'];
+                                    var motiv = output['motiv'];
+
                                     geoPlecare = L.esri.Geocoding.geocode().text(output['loc_plecare']).run(function(err, rezultat, response){
                                         markerPlecare = L.marker(rezultat.results[0].latlng,{icon: icons['departure']});
-                                        popupContent = output['nr_copii']; //probleme aici apare doar descrierea la ultima migrare
-                                        markerPlecare.bindPopup(popupContent)
+                                        //popupContent = descriere + nr_copii + nr_adulti + dataplecare; //probleme aici apare doar descrierea la ultima migrare
+                                        //markerPlecare.bindPopup(popupContent)
                                         results.addLayer(markerPlecare);
                                         latlngs.push(markerPlecare.getLatLng());
                                     });
 
+                                    //wait(200);
+
                                     geoDestinatie = L.esri.Geocoding.geocode().text(output['loc_destinatie']).run(function(err, rezultat, response){
                                         markerDestinatie = L.marker(rezultat.results[0].latlng, {icon: icons['destination']});
-                                        popupContent = output['nr_copii']; //probleme aici apare doar descrierea la ultima migrare
-                                        markerDestinatie.bindPopup(popupContent)
+                                        //popupContent = descriere; //probleme aici apare doar descrierea la ultima migrare
+                                        //markerDestinatie.bindPopup(popupContent)
                                         results.addLayer(markerDestinatie);
                                         latlngs.push(markerDestinatie.getLatLng());
 
-                                        polyline = L.polyline(latlngs, {color: getRandomColor(), weight:3, opacity:0.9, smoothFactor: 1});
-                                        polyline.bindPopup(output['descriere']);
+                                        polyline = L.polyline(latlngs, {color: getRandomColor(), weight:6, opacity:0.9, smoothFactor: 1});
+                                        polyline.bindPopup("Descriere: " + descriere + "\nNumar copii: " + nr_copii +"\nNumar adulti: " + nr_adulti +"\nData migrare: "+ dataplecare + "\nMotiv: " + motiv);
                                         polyline.addTo(map);
 
                                         latlngs = []; //clear
@@ -132,19 +145,8 @@
 						</script>
 
                     </div>
-					<ul>
-						<li>Migration from Romania</li>
-						<li>12 March 2018</li>
-						<li>From Romania to Italia</li>
-					</ul>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla cursus maximus fermentum. In posuere turpis vitae ante egestas, sit amet cursus elit molestie. Morbi mattis scelerisque enim. Ut a urna nunc. Duis cursus, nisl non viverra sodales, justo tellus condimentum mauris, et mollis erat eros eu nisi. Donec id lacus lacus. Suspendisse interdum porttitor lectus, eu malesuada ligula tempor ac. Praesent tincidunt dui mi, quis tincidunt sem lobortis ac. Maecenas iaculis sapien et maximus feugiat. Etiam ultricies, velit vel sodales rhoncus, risus ligula feugiat est, sit amet tempus tortor massa vitae diam. Quisque vel est turpis. Vestibulum consequat consequat leo id placerat. Vivamus ultricies malesuada eleifend. Aliquam quis bibendum metus, varius dignissim enim. Mauris eget enim sed justo scelerisque ultrices quis vel mauris.</p>
-					<a href="#">
-						<p class="align-right">Share on Facebook</p>
-					</a>
-
 			</article>
 		</div>
 	</div>
-
 </body>
 </html>
