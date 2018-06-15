@@ -13,8 +13,10 @@ class Main extends Controller
         require_once ('../app/models/Database.php');
         $xml = new DOMDocument();
         $conn=Database::getConection();
-        $sql="select * from migration order by data_postare desc";
-        $result=mysqli_query($conn,$sql);
+        $sql=$conn->prepare("select * from migration order by data_postare desc");
+        $sql->execute();
+        $result=$sql->get_result();
+        $sql->close();
         $migrations=$xml->createElement('migration');
         $xml->appendChild($migrations);
         while ($row = mysqli_fetch_assoc($result)){
@@ -56,7 +58,7 @@ class Main extends Controller
             $post->appendChild($plecare);
             $post->appendChild($datapostare);
             $migrations->appendChild( $post );
-            $xml->save('../app/models/migration.xml');
+            $xml->save('../public/xml/migration.xml');
 
         }
 

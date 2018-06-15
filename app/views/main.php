@@ -28,11 +28,6 @@
 </head>
 <body class="body">
 
-<div class="top-nav">
-    <img src="img/search.png" alt="search-icon" class="search-icon">
-    <input type="text" placeholder="Search..">
-</div>
-
 <div class="side-nav">
     <a href="main"><img src="img/logo.png" alt="logo-icon" id="logo-icon"></a>
     <ul>
@@ -95,7 +90,7 @@
                     };
 
                     wait(200);
-                    getXML('../app/models/migration.xml').done(function (xml) {
+                    getXML('../public/xml/migration.xml').done(function (xml) {
                         results.clearLayers();
 
                         var output = {};
@@ -147,29 +142,6 @@
                             polyline.bindPopup("Descriere: " + descriere + "</br>Numar copii: " + nr_copii + "</br>Numar adulti: " + nr_adulti + "</br>Data migrare: " + dataplecare + "</br>Motiv: " + motiv);
                             polyline.addTo(map);
 
-                            /*geoPlecare = L.esri.Geocoding.geocode().text(output['loc_plecare']).run(function(err, rezultat, response){
-                                markerPlecare = L.marker(rezultat.results[0].latlng,{icon: icons['departure']});
-                                console.log(markerPlecare.getLatLng());
-                                //popupContent = descriere + nr_copii + nr_adulti + dataplecare; //probleme aici apare doar descrierea la ultima migrare
-                                //markerPlecare.bindPopup(popupContent)
-                                results.addLayer(markerPlecare);
-                                latlngs.push(markerPlecare.getLatLng());
-                                wait(100);
-                            });
-
-
-                            geoDestinatie = L.esri.Geocoding.geocode().text(output['loc_destinatie']).run(function(err, rezultat, response){
-                                markerDestinatie = L.marker(rezultat.results[0].latlng, {icon: icons['destination']});
-                                //popupContent = descriere; //probleme aici apare doar descrierea la ultima migrare
-                                //markerDestinatie.bindPopup(popupContent)
-                                results.addLayer(markerDestinatie);
-                                latlngs.push(markerDestinatie.getLatLng());
-
-                                polyline = L.polyline(latlngs, {color: getRandomColor(), weight:6, opacity:0.9, smoothFactor: 1});
-                                polyline.bindPopup("Descriere: " + descriere + "</br>Numar copii: " + nr_copii +"</br>Numar adulti: " + nr_adulti +"</br>Data migrare: "+ dataplecare + "</br>Motiv: " + motiv);
-                                polyline.addTo(map);
-
-                                latlngs = []; //clear*/
                         })
 
                     });

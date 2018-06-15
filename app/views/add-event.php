@@ -26,14 +26,11 @@ if(!isset($_SESSION['loged_in'])){
     <link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder@2.2.9/dist/esri-leaflet-geocoder.css">
     <script src="https://unpkg.com/esri-leaflet-geocoder@2.2.8"></script>
 
-    <script src="leaflet/leaflet.ajax.min.js"></script>
+    <script src="../public/leaflet/leaflet.ajax.min.js"></script>
 
 </head>
 <body class="body">
 
-<div class="top-nav">
-    <!--<img src="img/search.png" alt="search-icon" class="search-icon">
-<input type="text" placeholder="Search..">-->
 </div>
 
 <div class="side-nav">
@@ -153,7 +150,7 @@ if(!isset($_SESSION['loged_in'])){
             </script>
         </div>
     </div>
-    <a href="main.html" id="back-button">Go back to the main page</a>
+    <a href="main" id="back-button">Go back to the main page</a>
 </div>
 </body>
 </html>

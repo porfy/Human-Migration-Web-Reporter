@@ -27,7 +27,7 @@ class Exportdataa extends Controller
             $info->appendChild($number);
             $info->appendChild($data);
             $root->appendChild($info);
-            $xml->save('../app/models/firstChart.xml');
+            $xml->save('../public/xml/firstChart.xml');
         }
         //second chart
         $sql=$conn->prepare("select count('motiv')as nr,motiv from migration group by motiv ");
@@ -46,7 +46,7 @@ class Exportdataa extends Controller
             $info->appendChild($motiv);
             $info->appendChild($number);
             $root->appendChild($info);
-            $xml->save("../app/models/secondChart.xml");
+            $xml->save("../public/xml/secondChart.xml");
         }
 
         //third chart
@@ -66,7 +66,7 @@ class Exportdataa extends Controller
             $info->appendChild($nr_copii);
             $info->appendChild($date);
             $root->appendChild($info);
-            $xml->save("../app/models/thirdChart.xml");
+            $xml->save("../public/xml/thirdChart.xml");
         }
 
     }

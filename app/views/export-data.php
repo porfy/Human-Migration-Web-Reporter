@@ -18,7 +18,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
 
 
-    <script type="text/javascript" src="../app/models/chart/Chart.js"></script>
+    <script type="text/javascript" src="../public/chart/Chart.js"></script>
 
 </head>
 <body class="body">
@@ -61,7 +61,7 @@
         }
 
         wait(200);
-        getXML('../app/models/firstChart.xml').done(function (xml) {
+        getXML('../public/xml/firstChart.xml').done(function (xml) {
             var output = {};
             $(xml).find('info').each(function () {
                 var nodes = $(this).children();
@@ -144,7 +144,7 @@
         }
 
         wait(200);
-        getXML("../app/models/secondChart.xml").done(function (xml) {
+        getXML("../public/xml/secondChart.xml").done(function (xml) {
             var output = {};
             $(xml).find('info').each(function () {
                 var nodes = $(this).children();
@@ -184,7 +184,7 @@
     </script>
     <div class="buttons">
         <button type="button" onclick='download("#secondChart")' name="app1">Download as PDF</button>
-        <button type="button" onclick='getxml("../app/models/secondChart.xml", "secondChart")' name="app2">Download XMl</button>
+        <button type="button" onclick='getxml("../public/xml/secondChart.xml", "secondChart")' name="app2">Download XMl</button>
     </div>
 
     <canvas id="third-chart" width="400" height="200"></canvas>
@@ -205,7 +205,7 @@
             return $.get(url)
         }
 
-        getXML("../app/models/thirdChart.xml").done(function (xml) {
+        getXML("../public/xml/thirdChart.xml").done(function (xml) {
             var output = {};
             $(xml).find('info').each(function () {
                 var nodes = $(this).children();
@@ -248,7 +248,7 @@
     </script>
     <div class="buttons">
         <button type="button" onclick='download("#third-chart")' name="app1">Download as PDF</button>
-        <button type="button" onclick='getxml("../app/models/thirdChart.xml", "thirdChart")' name="app3">Download XMl</button>
+        <button type="button" onclick='getxml("../public/xml/thirdChart.xml", "thirdChart")' name="app3">Download XMl</button>
     </div>
 
     <script>
@@ -294,7 +294,7 @@
             pdf.addImage($(pdfCanvas)[0], 'PNG', 0, 0);
 
             // download the pdf
-            pdf.save('filename.pdf');
+            pdf.save('chart.pdf');
         };
     </script>
     <script>

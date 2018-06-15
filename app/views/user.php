@@ -52,7 +52,7 @@ if(!isset($_SESSION['loged_in'])){
                     echo $_SESSION['nr_postari'];
                     ?></li>
 			</ul>
-			<a href="main.html" id="back-button">Go back to the main page</a>
+			<a href="main" id="back-button">Go back to the main page</a>
 			
 		</div>
 	</div>

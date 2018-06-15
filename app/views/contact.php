@@ -1,3 +1,11 @@
+<?php
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+    if(!isset($_SESSION['loged_in'])){
+        header('Location: login');
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,7 +51,7 @@
 				<li>Location: Iasi, Romania</li>
 				<li>Email: porfy94@gmail.com</li>
 			</ul>
-			<a href="main.html" id="back-button">Go back to the main page</a>
+			<a href="main" id="back-button">Go back to the main page</a>
 			
 		</div>
 	</div>
